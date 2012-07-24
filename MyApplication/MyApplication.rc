@@ -1,0 +1,327 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MYAPPLICATION_DIALOG DIALOGEX 0, 0, 440, 362
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "MyApplication"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_PIC_FRAME,"Static",SS_BLACKFRAME,7,7,426,295
+    PUSHBUTTON      "Setting",IDC_PROCESS,367,330,66,16
+    PUSHBUTTON      "Grab",IDC_GRAB,367,308,66,16
+    CONTROL         "",IDC_RED,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,35,304,161,14
+    LTEXT           "Red",IDC_STATIC,7,308,14,8
+    CONTROL         "",IDC_GREEN,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,35,320,161,16
+    CONTROL         "",IDC_BLUE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,35,336,161,14
+    LTEXT           "Green",IDC_STATIC,7,323,20,8
+    LTEXT           "Blue",IDC_STATIC,7,339,14,8
+    LTEXT           "0",IDC_RED_VALUE,199,307,14,8
+    LTEXT           "0",IDC_GREEN_VALUE,199,324,14,8
+    LTEXT           "0",IDC_BLUE_VALUE,199,339,15,8
+    LTEXT           "X : ",IDC_STATIC,244,307,12,8
+    LTEXT           "Y : ",IDC_STATIC,244,319,12,8
+    LTEXT           "0",IDC_POSX,257,307,17,8
+    LTEXT           "0",IDC_POSY,257,319,16,8
+    LTEXT           "A :",IDC_STATIC,243,330,10,8
+    LTEXT           "0",IDC_THETA,257,330,17,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "MyApplication.exe"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "MyApplication.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MYAPPLICATION_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 433
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 355
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Indonesian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_IND)
+#ifdef _WIN32
+LANGUAGE LANG_INDONESIAN, SUBLANG_DEFAULT
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SETTING_DIALOG DIALOGEX 0, 0, 290, 326
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Load",IDC_LOAD,179,276,50,14
+    PUSHBUTTON      "Save",IDC_SAVE,233,276,50,14
+    GROUPBOX        "Ball Color",IDC_STATIC,7,6,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,15,18,14,14
+    EDITTEXT        IDC_RED_FIELD,39,18,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,18,11,14
+    LTEXT           "Green",IDC_STATIC,15,36,20,14
+    EDITTEXT        IDC_GREEN_FIELD,39,36,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,36,11,14
+    LTEXT           "Blue",IDC_STATIC,15,55,14,14
+    EDITTEXT        IDC_BLUE_FIELD,39,55,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,55,11,14
+    PUSHBUTTON      "Pick Color",IDC_PICK_COLOR,83,18,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_SET_BTN1,83,36,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetBall,83,55,50,14,WS_GROUP
+    GROUPBOX        "Team 1 Color",IDC_STATIC,150,6,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,158,18,14,14
+    EDITTEXT        IDC_RED_FIELD2,182,18,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,18,11,14
+    LTEXT           "Green",IDC_STATIC,158,36,20,14
+    EDITTEXT        IDC_GREEN_FIELD2,182,36,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,36,11,14
+    LTEXT           "Blue",IDC_STATIC,158,55,14,14
+    EDITTEXT        IDC_BLUE_FIELD2,182,55,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,55,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickHome,226,18,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_SET_BTN2,226,36,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetHome,226,55,50,14,WS_GROUP
+    GROUPBOX        "Color #1",IDC_STATIC,7,85,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,15,97,14,14
+    EDITTEXT        IDC_RED_FIELD3,39,97,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,97,11,14
+    LTEXT           "Green",IDC_STATIC,15,115,20,14
+    EDITTEXT        IDC_GREEN_FIELD3,39,115,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,115,11,14
+    LTEXT           "Blue",IDC_STATIC,15,133,14,14
+    EDITTEXT        IDC_BLUE_FIELD3,39,133,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,133,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickColor1,83,97,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_BUTTON13,83,115,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetColor1,83,133,50,14,WS_GROUP
+    GROUPBOX        "Color #2",IDC_STATIC,150,85,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,158,97,14,14
+    EDITTEXT        IDC_RED_FIELD4,182,97,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,97,11,14
+    LTEXT           "Green",IDC_STATIC,158,115,20,14
+    EDITTEXT        IDC_GREEN_FIELD4,182,115,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,115,11,14
+    LTEXT           "Blue",IDC_STATIC,158,134,14,14
+    EDITTEXT        IDC_BLUE_FIELD4,182,134,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,134,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickColor2,226,97,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_BUTTON16,226,115,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetColor2,226,134,50,14,WS_GROUP
+    GROUPBOX        "Color #3",IDC_STATIC,7,165,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,15,177,14,14
+    EDITTEXT        IDC_RED_FIELD5,39,177,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN5,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,177,11,14
+    LTEXT           "Green",IDC_STATIC,15,195,20,14
+    EDITTEXT        IDC_GREEN_FIELD5,39,195,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN5,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,195,11,14
+    LTEXT           "Blue",IDC_STATIC,15,213,14,14
+    EDITTEXT        IDC_BLUE_FIELD5,39,213,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN5,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,213,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickColor3,83,177,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_BUTTON19,83,195,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetColor3,83,213,50,14,WS_GROUP
+    GROUPBOX        "Secondary Color",IDC_STATIC,150,165,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,158,177,14,14
+    EDITTEXT        IDC_RED_FIELD6,182,177,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN6,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,177,11,14
+    LTEXT           "Green",IDC_STATIC,158,195,20,14
+    EDITTEXT        IDC_GREEN_FIELD6,182,195,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN6,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,195,11,14
+    LTEXT           "Blue",IDC_STATIC,158,214,14,14
+    EDITTEXT        IDC_BLUE_FIELD6,182,214,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN6,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,206,214,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickSecondary,226,177,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_BUTTON22,226,195,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetSecColor,226,214,50,14,WS_GROUP
+    GROUPBOX        "Team 2 Color",IDC_STATIC,7,247,133,72,WS_GROUP
+    LTEXT           "Red",IDC_STATIC,15,259,14,14
+    EDITTEXT        IDC_RED_FIELD7,39,259,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_RED_SPIN7,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,259,11,14
+    LTEXT           "Green",IDC_STATIC,15,277,20,14
+    EDITTEXT        IDC_GREEN_FIELD7,39,277,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_GREEN_SPIN7,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,277,11,14
+    LTEXT           "Blue",IDC_STATIC,15,295,14,14
+    EDITTEXT        IDC_BLUE_FIELD7,39,295,30,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    CONTROL         "",IDC_BLUE_SPIN7,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,63,295,11,14
+    PUSHBUTTON      "Pick Color",IDC_PickOpp,83,259,50,14,WS_GROUP
+    PUSHBUTTON      "Set",IDC_BUTTON25,83,277,50,14,WS_GROUP
+    PUSHBUTTON      "Reset",IDC_ResetOpp,83,295,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDABORT,233,297,50,14
+    DEFPUSHBUTTON   "OK",IDOK,180,297,49,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SETTING_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 283
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 319
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\MyApplication.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\MyApplication.ico"
+#endif    // Indonesian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\MyApplication.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
