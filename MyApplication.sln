@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyApplication", "MyApplication\MyApplication.vcproj", "{D05584A6-46DF-4A30-9DAE-7A62529C3FD8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoadImageCV", "LoadImageCV\LoadImageCV.vcproj", "{75700A8B-B12E-4182-94E9-477680772854}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dummy", "Dummy\Dummy.vcproj", "{7238CFF1-4E74-484A-843C-9B0AF75D0674}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -17,14 +13,6 @@ Global
 		{D05584A6-46DF-4A30-9DAE-7A62529C3FD8}.Debug|Win32.Build.0 = Debug|Win32
 		{D05584A6-46DF-4A30-9DAE-7A62529C3FD8}.Release|Win32.ActiveCfg = Release|Win32
 		{D05584A6-46DF-4A30-9DAE-7A62529C3FD8}.Release|Win32.Build.0 = Release|Win32
-		{75700A8B-B12E-4182-94E9-477680772854}.Debug|Win32.ActiveCfg = Debug|Win32
-		{75700A8B-B12E-4182-94E9-477680772854}.Debug|Win32.Build.0 = Debug|Win32
-		{75700A8B-B12E-4182-94E9-477680772854}.Release|Win32.ActiveCfg = Release|Win32
-		{75700A8B-B12E-4182-94E9-477680772854}.Release|Win32.Build.0 = Release|Win32
-		{7238CFF1-4E74-484A-843C-9B0AF75D0674}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7238CFF1-4E74-484A-843C-9B0AF75D0674}.Debug|Win32.Build.0 = Debug|Win32
-		{7238CFF1-4E74-484A-843C-9B0AF75D0674}.Release|Win32.ActiveCfg = Release|Win32
-		{7238CFF1-4E74-484A-843C-9B0AF75D0674}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
