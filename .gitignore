@@ -34,6 +34,7 @@ build/
 *.tmp
 *.vspscc
 *.vssscc
+*.exe
 .builds
 
 *.pidb
