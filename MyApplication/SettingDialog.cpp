@@ -247,66 +247,7 @@ void CSettingDialog::setDefaultColor()
 
 void CSettingDialog::saveColorToText()
 {
-	CString colorString =_T(""), tmp=_T("");
-	//BallColor ball;
-	//RobotColor teamColor, oppcolor, firstColor[3], secColor;
-	ball.red = m_RedField1.GetPos();
-	ball.green = m_GreenField1.GetPos();
-	ball.blue = m_BlueField1.GetPos();
 	
-	tmp.Format("ball color:\t %d %d %d\n",
-			   ball.red, ball.green, ball.blue);
-	colorString.Append(tmp);
-
-	teamColor.red	= m_RedField2.GetPos();
-	teamColor.green	= m_GreenField2.GetPos();
-	teamColor.blue	= m_BlueField2.GetPos();
-
-	tmp.Format("teamColor:\t %d %d %d\n",
-			   teamColor.red, teamColor.green, teamColor.blue);
-	colorString.Append(tmp);
-
-	firstColor[0].red	= m_RedField3.GetPos();
-	firstColor[0].green	= m_GreenField3.GetPos();
-	firstColor[0].blue	= m_BlueField3.GetPos();
-
-	tmp.Format("firstColor[0]:\t %d %d %d\n",
-			   firstColor[0].red, firstColor[0].green, firstColor[0].blue);
-	colorString.Append(tmp);
-	
-	firstColor[1].red	= m_RedField4.GetPos();
-	firstColor[1].green	= m_GreenField4.GetPos();
-	firstColor[1].blue	= m_BlueField4.GetPos();
-
-	tmp.Format("firstColor[1]:\t %d %d %d\n",
-			   firstColor[1].red, firstColor[1].green, firstColor[1].blue);
-	colorString.Append(tmp);
-
-	firstColor[2].red	= m_RedField5.GetPos();
-	firstColor[2].green	= m_GreenField5.GetPos();
-	firstColor[2].blue	= m_BlueField5.GetPos();
-
-	tmp.Format("firstColor[2]:\t %d %d %d\n",
-			   firstColor[2].red, firstColor[2].green, firstColor[2].blue);
-	colorString.Append(tmp);
-
-	secColor.red	= m_RedField6.GetPos();
-	secColor.green	= m_GreenField6.GetPos();
-	secColor.blue	= m_BlueField6.GetPos();
-
-	tmp.Format("secColor:\t %d %d %d\n",
-			   secColor.red, secColor.green, secColor.blue);
-	colorString.Append(tmp);
-
-	oppColor.red	= m_RedField7.GetPos();
-	oppColor.green	= m_GreenField7.GetPos();
-	oppColor.blue	= m_BlueField7.GetPos();
-
-	tmp.Format("oppColor:\t %d %d %d\n",
-			   oppColor.red, oppColor.green, oppColor.blue);
-	colorString.Append(tmp);
-
-	OutputDebugString(colorString);
 	//di sini save colorString ke file teks. 
 	//TODO: how to save to text? DONE (22/7)
 	CString fName="";
@@ -317,6 +258,66 @@ void CSettingDialog::saveColorToText()
 	UpdateData(TRUE);
 	if(dlg.DoModal() == IDOK)
 	{
+		CString colorString =_T(""), tmp=_T("");
+		//BallColor ball;
+		//RobotColor teamColor, oppcolor, firstColor[3], secColor;
+		ball.red = m_RedField1.GetPos();
+		ball.green = m_GreenField1.GetPos();
+		ball.blue = m_BlueField1.GetPos();
+		
+		tmp.Format("ball color:\t %d %d %d\n",
+				   ball.red, ball.green, ball.blue);
+		colorString.Append(tmp);
+
+		teamColor.red	= m_RedField2.GetPos();
+		teamColor.green	= m_GreenField2.GetPos();
+		teamColor.blue	= m_BlueField2.GetPos();
+
+		tmp.Format("teamColor:\t %d %d %d\n",
+				   teamColor.red, teamColor.green, teamColor.blue);
+		colorString.Append(tmp);
+
+		firstColor[0].red	= m_RedField3.GetPos();
+		firstColor[0].green	= m_GreenField3.GetPos();
+		firstColor[0].blue	= m_BlueField3.GetPos();
+
+		tmp.Format("firstColor[0]:\t %d %d %d\n",
+				   firstColor[0].red, firstColor[0].green, firstColor[0].blue);
+		colorString.Append(tmp);
+		
+		firstColor[1].red	= m_RedField4.GetPos();
+		firstColor[1].green	= m_GreenField4.GetPos();
+		firstColor[1].blue	= m_BlueField4.GetPos();
+
+		tmp.Format("firstColor[1]:\t %d %d %d\n",
+				   firstColor[1].red, firstColor[1].green, firstColor[1].blue);
+		colorString.Append(tmp);
+
+		firstColor[2].red	= m_RedField5.GetPos();
+		firstColor[2].green	= m_GreenField5.GetPos();
+		firstColor[2].blue	= m_BlueField5.GetPos();
+
+		tmp.Format("firstColor[2]:\t %d %d %d\n",
+				   firstColor[2].red, firstColor[2].green, firstColor[2].blue);
+		colorString.Append(tmp);
+
+		secColor.red	= m_RedField6.GetPos();
+		secColor.green	= m_GreenField6.GetPos();
+		secColor.blue	= m_BlueField6.GetPos();
+
+		tmp.Format("secColor:\t %d %d %d\n",
+				   secColor.red, secColor.green, secColor.blue);
+		colorString.Append(tmp);
+
+		oppColor.red	= m_RedField7.GetPos();
+		oppColor.green	= m_GreenField7.GetPos();
+		oppColor.blue	= m_BlueField7.GetPos();
+
+		tmp.Format("oppColor:\t %d %d %d\n",
+				   oppColor.red, oppColor.green, oppColor.blue);
+		colorString.Append(tmp);
+
+		OutputDebugString(colorString);
 		if(dlg.GetFileName())
 		{
 			fName = dlg.GetFolderPath()+"\\"+dlg.GetFileName();//kalau ga pake path, nyimpennya di tempat exe
@@ -326,10 +327,11 @@ void CSettingDialog::saveColorToText()
 			fprintf(fn,"%s",colorString);
 			fclose(fn);
 		}
+		colorString.Empty();
 	}
 	UpdateData(FALSE);
 	//hapus isi colorString
-	colorString.Empty();
+	
 
 }
 
@@ -434,6 +436,38 @@ void CSettingDialog::loadColorSettings()
 void CSettingDialog::OnBnClickedOk()
 {
 	// TODO: Add your control notification handler code here
+		//BallColor ball;
+		//RobotColor teamColor, oppcolor, firstColor[3], secColor;
+	ball.red = m_RedField1.GetPos();
+	ball.green = m_GreenField1.GetPos();
+	ball.blue = m_BlueField1.GetPos();
+	
+	teamColor.red	= m_RedField2.GetPos();
+	teamColor.green	= m_GreenField2.GetPos();
+	teamColor.blue	= m_BlueField2.GetPos();
+
+	
+	firstColor[0].red	= m_RedField3.GetPos();
+	firstColor[0].green	= m_GreenField3.GetPos();
+	firstColor[0].blue	= m_BlueField3.GetPos();
+
+	firstColor[1].red	= m_RedField4.GetPos();
+	firstColor[1].green	= m_GreenField4.GetPos();
+	firstColor[1].blue	= m_BlueField4.GetPos();
+
+	firstColor[2].red	= m_RedField5.GetPos();
+	firstColor[2].green	= m_GreenField5.GetPos();
+	firstColor[2].blue	= m_BlueField5.GetPos();
+
+	secColor.red	= m_RedField6.GetPos();
+	secColor.green	= m_GreenField6.GetPos();
+	secColor.blue	= m_BlueField6.GetPos();
+
+	oppColor.red	= m_RedField7.GetPos();
+	oppColor.green	= m_GreenField7.GetPos();
+	oppColor.blue	= m_BlueField7.GetPos();
+
+	
 	OnOK();
 }
 
