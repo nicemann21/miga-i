@@ -18,6 +18,13 @@ typedef struct
 	short blue;
 } RobotColor;
 
+//tes color setting (25/7)
+typedef struct
+{
+	BallColor ball;
+	RobotColor teamColor, oppColor, firstColor[3], secColor;
+} ColorSettings;
+
 class CSettingDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CSettingDialog)
@@ -47,6 +54,9 @@ public:
 	void setDefaultColor();
 	void saveColorToText();
 	void loadColorSettings();
+	void getColorSettings(ColorSettings c);
+	BallColor ball;
+	RobotColor teamColor, oppColor, firstColor[3], secColor;
 
 	CImageProc* img_proc;
 	afx_msg void OnBnClickedSetBtn1();
@@ -57,16 +67,19 @@ public:
 	CSpinButtonCtrl m_RedField4;
 	CSpinButtonCtrl m_RedField5;
 	CSpinButtonCtrl m_RedField6;
+	CSpinButtonCtrl m_RedField7;
 	CSpinButtonCtrl m_BlueField2;
 	CSpinButtonCtrl m_BlueField3;
 	CSpinButtonCtrl m_BlueField4;
 	CSpinButtonCtrl m_BlueField5;
 	CSpinButtonCtrl m_BlueField6;
+	CSpinButtonCtrl m_BlueField7;
 	CSpinButtonCtrl m_GreenField2;
 	CSpinButtonCtrl m_GreenField3;
 	CSpinButtonCtrl m_GreenField4;
 	CSpinButtonCtrl m_GreenField5;
 	CSpinButtonCtrl m_GreenField6;
+	CSpinButtonCtrl m_GreenField7;
 
 
 	
@@ -78,6 +91,9 @@ public:
 	afx_msg void OnBnClickedPickcolor3();
 	afx_msg void OnBnClickedPicksecondary();
 	afx_msg void OnBnClickedPickopp();
+
+//private:
+	
 };
 
 

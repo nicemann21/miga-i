@@ -33,16 +33,19 @@ void CSettingDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RED_SPIN4, m_RedField4);
 	DDX_Control(pDX, IDC_RED_SPIN5, m_RedField5);
 	DDX_Control(pDX, IDC_RED_SPIN6, m_RedField6);
+	DDX_Control(pDX, IDC_RED_SPIN7, m_RedField7);
 	DDX_Control(pDX, IDC_GREEN_SPIN2, m_GreenField2);
 	DDX_Control(pDX, IDC_GREEN_SPIN3, m_GreenField3);
 	DDX_Control(pDX, IDC_GREEN_SPIN4, m_GreenField4);
 	DDX_Control(pDX, IDC_GREEN_SPIN5, m_GreenField5);
 	DDX_Control(pDX, IDC_GREEN_SPIN6, m_GreenField6);
+	DDX_Control(pDX, IDC_GREEN_SPIN7, m_GreenField7);
 	DDX_Control(pDX, IDC_BLUE_SPIN2, m_BlueField2);
 	DDX_Control(pDX, IDC_BLUE_SPIN3, m_BlueField3);
 	DDX_Control(pDX, IDC_BLUE_SPIN4, m_BlueField4);
 	DDX_Control(pDX, IDC_BLUE_SPIN5, m_BlueField5);
 	DDX_Control(pDX, IDC_BLUE_SPIN6, m_BlueField6);
+	DDX_Control(pDX, IDC_BLUE_SPIN7, m_BlueField7);
 }
 
 
@@ -233,13 +236,20 @@ void CSettingDialog::setDefaultColor()
 	m_GreenField6.SetPos(200);
 	m_BlueField6.SetRange(0, 255);
 	m_BlueField6.SetPos(200);
+
+	m_RedField7.SetRange(0, 255);
+	m_RedField7.SetPos(200);
+	m_GreenField7.SetRange(0, 255);
+	m_GreenField7.SetPos(200);
+	m_BlueField7.SetRange(0, 255);
+	m_BlueField7.SetPos(200);
 }
 
 void CSettingDialog::saveColorToText()
 {
 	CString colorString =_T(""), tmp=_T("");
-	BallColor ball;
-	RobotColor teamColor, oppcolor, firstColor[3], secColor;
+	//BallColor ball;
+	//RobotColor teamColor, oppcolor, firstColor[3], secColor;
 	ball.red = m_RedField1.GetPos();
 	ball.green = m_GreenField1.GetPos();
 	ball.blue = m_BlueField1.GetPos();
@@ -286,6 +296,14 @@ void CSettingDialog::saveColorToText()
 
 	tmp.Format("secColor:\t %d %d %d\n",
 			   secColor.red, secColor.green, secColor.blue);
+	colorString.Append(tmp);
+
+	oppColor.red	= m_RedField7.GetPos();
+	oppColor.green	= m_GreenField7.GetPos();
+	oppColor.blue	= m_BlueField7.GetPos();
+
+	tmp.Format("oppColor:\t %d %d %d\n",
+			   oppColor.red, oppColor.green, oppColor.blue);
 	colorString.Append(tmp);
 
 	OutputDebugString(colorString);
@@ -347,8 +365,8 @@ void CSettingDialog::loadColorSettings()
 	OutputDebugString(colorString);
 	UpdateData(FALSE);
 	//hasil load dimasukkan ke variable;
-	BallColor ball;
-	RobotColor teamColor, oppcolor, firstColor[3], secColor;
+	//BallColor ball;
+	//RobotColor teamColor, oppcolor, firstColor[3], secColor;
 
 	sscanf(colorString,
 		"#file configuration\nball color:\t %d %d %d\n \
@@ -356,13 +374,15 @@ void CSettingDialog::loadColorSettings()
 		firstColor[0]:\t %d %d %d\n \
 		firstColor[1]:\t %d %d %d\n \
 		firstColor[2]:\t %d %d %d\n \
-		secColor:\t %d %d %d\n",
+		secColor:\t %d %d %d\n \
+		oppColor:\t %d %d %d\n",
 		&ball.red, &ball.green, &ball.blue,
 		&teamColor.red, &teamColor.green, &teamColor.blue,
 		&firstColor[0].red, &firstColor[0].green, &firstColor[0].blue,
 		&firstColor[1].red, &firstColor[1].green, &firstColor[1].blue,
 		&firstColor[2].red, &firstColor[2].green, &firstColor[2].blue,
-		&secColor.red, &secColor.green, &secColor.blue);
+		&secColor.red, &secColor.green, &secColor.blue,
+		&oppColor.red, &oppColor.green, &oppColor.blue);
 	
 	//tes. bisa ternyata
 	temp.Format("\n\nball: %d %d %d\n \
@@ -370,13 +390,15 @@ void CSettingDialog::loadColorSettings()
 		firstColor[0]:\t %d %d %d\n \
 		firstColor[1]:\t %d %d %d\n \
 		firstColor[2]:\t %d %d %d\n \
-		secColor:\t %d %d %d\n",
+		secColor:\t %d %d %d\n \
+		oppColor:\t %d %d %d\n",
 		ball.red, ball.green, ball.blue,
 		teamColor.red, teamColor.green, teamColor.blue,
 		firstColor[0].red, firstColor[0].green, firstColor[0].blue,
 		firstColor[1].red, firstColor[1].green, firstColor[1].blue,
 		firstColor[2].red, firstColor[2].green, firstColor[2].blue,
-		secColor.red, secColor.green, secColor.blue);
+		secColor.red, secColor.green, secColor.blue,
+		oppColor.red, oppColor.green, oppColor.blue);
 	OutputDebugString(temp);
 	//masukkan ke form
 	m_RedField1.SetPos(ball.red);
@@ -403,11 +425,11 @@ void CSettingDialog::loadColorSettings()
 	m_GreenField6.SetPos(secColor.green);
 	m_BlueField6.SetPos(secColor.blue);
 
-	/*
-	m_RedField7.SetPos(ball.red);
-	m_GreenField7.SetPos(ball.green);
-	m_BlueField7.SetPos(ball.blue);
-	*/
+	
+	m_RedField7.SetPos(oppColor.red);
+	m_GreenField7.SetPos(oppColor.green);
+	m_BlueField7.SetPos(oppColor.blue);
+	
 }
 void CSettingDialog::OnBnClickedOk()
 {
@@ -461,4 +483,18 @@ void CSettingDialog::OnBnClickedPickopp()
 	pickingUp = true;
 	IDColor = 6;
 	ShowWindow(SW_HIDE);
+}
+
+void CSettingDialog::getColorSettings(ColorSettings c)
+{
+	c.ball.blue = m_BlueField1.GetPos();
+	c.ball.green = m_GreenField1.GetPos();
+	c.ball.red = m_RedField1.GetPos();
+	
+	c.firstColor[0] = firstColor[0];
+	c.firstColor[1] = firstColor[1];
+	c.firstColor[2] = firstColor[2];
+	c.oppColor = oppColor;
+	c.secColor = secColor;
+	c.teamColor = teamColor;
 }
