@@ -8,7 +8,7 @@
 #include <string.h>
 #include "winbase.h"
 
-//iocp
+//iocp//
 #include "IOCP.h"
 #include "ImageProc.h"
 
@@ -92,7 +92,7 @@ BOOL CMyApplicationDlg::OnInitDialog()
 	setting.Create(IDD_SETTING_DIALOG, this);
 	imgProc = CImageProc();
 //	setting = CSettingDialog();
-
+	
 	homeTeamColor	= cv::Vec3b(87, 176, 193);
 	oppoTeamColor	= cv::Vec3b(255, 0, 255);
 	ballColor		= cv::Vec3b(62, 81, 213);
@@ -100,6 +100,23 @@ BOOL CMyApplicationDlg::OnInitDialog()
 	homeSecondColor = cv::Vec3b(145, 227, 140);
 	homeThirdColor	= cv::Vec3b(200, 100, 0);
 	secondaryColor	= cv::Vec3b(210, 210, 210);
+	
+
+	CString temp;
+	temp.Format("\ndi init\nball: %d %d %d\n \
+		teamColor:\t %d %d %d\n \
+		firstColor[0]:\t %d %d %d\n \
+		firstColor[1]:\t %d %d %d\n \
+		firstColor[2]:\t %d %d %d\n \
+		secColor:\t %d %d %d\n \
+		oppColor:\t %d %d %d\n",
+		setting.ball.red, setting.ball.green, setting.ball.blue,
+		setting.teamColor.red, setting.teamColor.green, setting.teamColor.blue,
+		setting.firstColor[0].red, setting.firstColor[0].green, setting.firstColor[0].blue,
+		setting.firstColor[1].red, setting.firstColor[1].green, setting.firstColor[1].blue,
+		setting.firstColor[2].red, setting.firstColor[2].green, setting.firstColor[2].blue,
+		setting.secColor.red, setting.secColor.green, setting.secColor.blue,
+		setting.oppColor.red, setting.oppColor.green, setting.oppColor.blue);
 
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -297,6 +314,10 @@ void CMyApplicationDlg::OnBnClickedProcess()
    //  RedrawWindow(NULL, NULL, RDW_INVALIDATE ); //Force update of dialog; 
 //	CSettingDialog setting = CSettingDialog();
 	setting.ShowWindow(SW_SHOW);
+	//tes nyimpen color setting di sini (25/7)
+	//ColorSettings c;
+	//setting.getColorSettings(c);
+	
 }
 
 void CMyApplicationDlg::OnBnClickedGrab()
@@ -396,6 +417,13 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 		pyrDown(img, pyr, cv::Size(img.cols/2, img.rows/2));
 		pyrUp(pyr, img, img.size());
 	//	CImageProc imgProc = CImageProc();
+		homeTeamColor	= cv::Vec3b(setting.teamColor.blue, setting.teamColor.green, setting.teamColor.red);
+		oppoTeamColor	= cv::Vec3b(setting.oppColor.blue, setting.oppColor.green, setting.oppColor.red);
+		ballColor		= cv::Vec3b(setting.ball.blue, setting.ball.green, setting.ball.red);
+		homeFirstColor	= cv::Vec3b(setting.firstColor[0].blue, setting.firstColor[0].green, setting.firstColor[0].red);
+		homeSecondColor = cv::Vec3b(setting.firstColor[1].blue, setting.firstColor[1].green, setting.firstColor[1].red);
+		homeThirdColor	= cv::Vec3b(setting.firstColor[2].blue, setting.firstColor[2].green, setting.firstColor[2].red);
+		secondaryColor	= cv::Vec3b(setting.secColor.blue, setting.secColor.green, setting.secColor.red);
 
 		imgProc.homeTeamColor=homeTeamColor;
 		imgProc.oppoTeamColor=oppoTeamColor;
@@ -419,7 +447,7 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 		dataPosisi.Append("\n");
 		tmp.Format("[%i] %s",counterData, dataPosisi);
 		dataPosisi = tmp;
-		OutputDebugString(tmp);
+		//OutputDebugString(tmp);
 		//kirim
 		kirimData();
 		imgProc.resetData();
