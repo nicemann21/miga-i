@@ -44,12 +44,15 @@ public:
 	BallDPosition Ball;
 	void AutoPosition();
 	void SendCommand(BYTE *Data);	//ini untuk mengirimkan data ke robot
+	void Strategy();
+	void setPos(int x, int y);
 
 	CGame();
 	virtual ~CGame();
 
 private:
 	void Velocity(int whichRobot);
+	void Position(int whichRobot, int x, int y);
 	void Angle(int whichRobot, int d_angle);//menentukan sudut berdasarkan sudut yang diminta
 	void Angle2(int whichRobot, double x, double y); //menentukan berdasarkan posisi x,y
 	void Goalie(int whichRobot);

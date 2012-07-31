@@ -117,6 +117,7 @@ BEGIN_MESSAGE_MAP(CClientRoSoDlg, CDialog)
 	//ON_BN_CLICKED(IDC_BUTTON5, &CClientRoSoDlg::OnBnClickedButton5)
 	ON_BN_CLICKED(IDC_StartGame, &CClientRoSoDlg::OnBnClickedStartgame)
 	ON_BN_CLICKED(IDC_CONNECT, &CClientRoSoDlg::OnBnClickedConnect)
+	ON_BN_CLICKED(IDC_StopGame, &CClientRoSoDlg::OnBnClickedStopgame)
 END_MESSAGE_MAP()
 
 
@@ -130,6 +131,7 @@ BOOL CClientRoSoDlg::OnInitDialog()
 	//Start System server client
 	StartTheSystem();
 	isKoneksi = FALSE;
+	m_GameStart = false;
 	// Add "About..." menu item to system menu.
 
 	// IDM_ABOUTBOX must be in the system command range.
@@ -289,16 +291,18 @@ void CClientRoSoDlg::OnTimer(UINT_PTR nIDEvent)
 	//ini yang server client(9/7/12)
 	UpdateData();
 	UpdateClientData();
-	UpdateData(FALSE);
+	
 
 
 	// AI
+	if(m_GameStart == true)
+		GameProccess();
 
 
 
 	// Send data to agent
 
-	
+	UpdateData(FALSE);
 }
 
 
@@ -371,7 +375,16 @@ void CClientRoSoDlg::OnBnClickedButton7()
 void CClientRoSoDlg::OnBnClickedStartgame()
 {
 	// TODO: menjalankan game
-	m_CGame.AutoPosition();
+	m_GameStart = true;
+	if(m_GameStart == true)
+	{
+		OutputDebugString("start true\n");
+	}else
+	{
+		OutputDebugString("start False\n");
+	}
+	//GameProccess();
+	//m_CGame.AutoPosition();
 }
 
 void CClientRoSoDlg::OnBnClickedConnect()
@@ -445,6 +458,7 @@ void CClientRoSoDlg::UpdateClientData()
 void CClientRoSoDlg::ekstrakData(CString data)
 {
 	//TODO: ini baru dummy. 
+	
 	int  Bx, By, count, idA, ax, ay, at, idB, bx, by, bt, idC, cx,cy,ct, idD, dx, dy, dt, idE, ex, ey, et, idF, fx, fy, ft;
 	CString hasil ="";
 	//sscanf(data,"[%d] ball %d %d | %d %d %d %d",&count, &bx, &by, &idA, &ax, &ay, &at);
@@ -457,10 +471,33 @@ void CClientRoSoDlg::ekstrakData(CString data)
 		&idE, &ex, &ey, &et,
 		&idF, &fx, &fy, &ft);
 	//OutputDebugString(data);
+	//////////hahn (31/7)
+	m_CGame.setPos(Bx, By);
+	//m_CGame.Ball.position.X = Bx;
+	//m_CGame.Ball.position.Y = By;
+	m_CGame.HomeRobot[0].position.X = ax;
+	m_CGame.HomeRobot[0].position.Y = ay;
+	m_CGame.HomeRobot[0].Angle		= at;
+	m_CGame.HomeRobot[1].position.X = bx;
+	m_CGame.HomeRobot[1].position.Y = by;
+	m_CGame.HomeRobot[1].Angle		= bt;
+	m_CGame.HomeRobot[2].position.X = cx;
+	m_CGame.HomeRobot[2].position.Y = cy;
+	m_CGame.HomeRobot[2].Angle		= ct;
+	m_CGame.HomeRobot[3].position.X = dx;
+	m_CGame.HomeRobot[3].position.Y = dy;
+	m_CGame.HomeRobot[3].Angle		= dt;
+	m_CGame.HomeRobot[4].position.X = ex;
+	m_CGame.HomeRobot[4].position.Y = ey;
+	m_CGame.HomeRobot[4].Angle		= et;
+
+	//////////hahn (31/7)
+
+
 	hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
 		count, bx, by, ax, ay, at);
-	if(!hasil.IsEmpty())
-		OutputDebugString(hasil);
+	//if(!hasil.IsEmpty())
+		//OutputDebugString(hasil);
 	//nambah bisa gerak ga itu si tombol
 	m_R1.MoveWindow(Bx,By,20,20,1);
 	m_R2.MoveWindow(ax,ay,20,20,1);
@@ -482,4 +519,18 @@ void CClientRoSoDlg::StartTheSystem()
 		MessageBox("StartSystem Ga bisa bro");
 		
 	}
+}
+/* proses game di sini(?)
+ * (31/7) H
+ */
+void CClientRoSoDlg::GameProccess()
+{
+	//1. ambil data posisi objek (bola dan robot)
+	m_CGame.Strategy();
+
+}
+void CClientRoSoDlg::OnBnClickedStopgame()
+{
+	// TODO: Add your control notification handler code here
+	m_GameStart = false;
 }
