@@ -17,8 +17,8 @@
 //ini penting!
 typedef struct
 {
-	double		X;		// position
-	double		Y;		// position
+	int		X;		// position
+	int		Y;		// position
 } DPosition;				// Double point. untuk posisi
 
 typedef struct
@@ -46,6 +46,9 @@ public:
 	void SendCommand(BYTE *Data);	//ini untuk mengirimkan data ke robot
 	void Strategy();
 	void setPos(int x, int y);
+
+	//tes:kejar bola
+	void FollowBall(int robot_id);
 
 	CGame();
 	virtual ~CGame();

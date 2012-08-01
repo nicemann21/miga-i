@@ -317,7 +317,7 @@ void CSettingDialog::saveColorToText()
 				   oppColor.red, oppColor.green, oppColor.blue);
 		colorString.Append(tmp);
 
-		OutputDebugString(colorString);
+		//OutputDebugString(colorString);
 		if(dlg.GetFileName())
 		{
 			fName = dlg.GetFolderPath()+"\\"+dlg.GetFileName();//kalau ga pake path, nyimpennya di tempat exe
@@ -363,8 +363,8 @@ void CSettingDialog::loadColorSettings()
 		//colorString.Append(temp);
 		fLoad.Close();
 	}
-	OutputDebugString("ini dari load\n");
-	OutputDebugString(colorString);
+	//OutputDebugString("ini dari load\n");
+	//OutputDebugString(colorString);
 	UpdateData(FALSE);
 	//hasil load dimasukkan ke variable;
 	//BallColor ball;

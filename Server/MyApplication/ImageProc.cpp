@@ -133,7 +133,7 @@ void CImageProc::teamAndBallIdentify( void ) {
 			  cv::Point(homeTeamColorPoint[i].x+2, homeTeamColorPoint[i].y+2), 
 			  cv::Scalar(255,255,0,0));
 		sprintf_s( text, "T%d", (i+1));
-		putText(MatImage, text , cv::Point(homeTeamColorPoint[i].x, homeTeamColorPoint[i].y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
+		//putText(MatImage, text , cv::Point(homeTeamColorPoint[i].x, homeTeamColorPoint[i].y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
 	}
 
 	for(int i=0; i<oppoTeamColorPoint.size(); i++){
@@ -292,8 +292,8 @@ void CImageProc::findHomeRobot( void ){
 
 		CString s = _T("");
 		//s.Format( _T("Team %ld location : %ld,%ld %ld degree\n"), x, locx, locy, (angle>=0?angle:(angle+360)));
-		s.Format( _T("%ld %ld %ld %ld | "), x, locx, locy, (angle>=0?angle:(angle+360)));
-		//OutputDebugStringW(s);
+		s.Format( _T("first[%d] %ld %ld %ld %ld | "), i, x, locx, locy, (angle>=0?angle:(angle+360)));
+		OutputDebugString(s);
 		outputString.Append(s);
 
 		//cout << x << " : " << dsy << " " << dsx << " : " << a << endl;

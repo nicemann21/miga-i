@@ -46,19 +46,21 @@ void CGame::Strategy()
 	CString tes;
 	tes.Format("isi di game.strategy()\n\n "
 		"posisi ball: (%d,%d) \n /"
-		"robot 1: %d, %d, %d\n /"
-		"robot 2: %d, %d\n /"
-		"robot 3: %d, %d\n /"
-		"robot 4: %d, %d\n /"
-		"robot 5: %d, %d\n ",
+		"robot 1: %d, %d, %d \n "
+		"robot 2: %d, %d, %d \n "
+		"robot 3: %d, %d, %d \n "
+		"robot 4: %d, %d, %d \n "
+		"robot 5: %d, %d, %d \n ",
 		bx, by,
-		hx, hy, ht,
-		HomeRobot[1].position.X, HomeRobot[1].position.Y,
-		HomeRobot[2].position.X, HomeRobot[2].position.Y,
-		HomeRobot[3].position.X, HomeRobot[3].position.Y,
-		HomeRobot[4].position.X, HomeRobot[4].position.Y);
+		HomeRobot[0].position.X, HomeRobot[0].position.Y, ht,
+		HomeRobot[1].position.X, HomeRobot[1].position.Y, HomeRobot[1].Angle,
+		HomeRobot[2].position.X, HomeRobot[2].position.Y, HomeRobot[2].Angle,
+		HomeRobot[3].position.X, HomeRobot[3].position.Y, HomeRobot[3].Angle,
+		HomeRobot[4].position.X, HomeRobot[4].position.Y, HomeRobot[4].Angle);
 	OutputDebugString(tes);
-	Position(0,556,37);
+	//Position(0,556,37);
+	//FollowBall(0);
+	Angle2(0,Ball.position.X, Ball.position.Y);
 
 }
 
@@ -210,4 +212,13 @@ void CGame::Position(int whichRobot, int x, int y)
 	//kirim data kecepatan ke velocity
 	Velocity(whichRobot);
 
+}
+
+void CGame::FollowBall(int robot_id)
+{
+	//ambil posisi bola
+	int bx, by;
+	bx = Ball.position.X;
+	by = Ball.position.Y;
+	Position(robot_id, bx, by);
 }

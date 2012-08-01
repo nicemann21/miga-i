@@ -376,13 +376,8 @@ void CClientRoSoDlg::OnBnClickedStartgame()
 {
 	// TODO: menjalankan game
 	m_GameStart = true;
-	if(m_GameStart == true)
-	{
-		OutputDebugString("start true\n");
-	}else
-	{
-		OutputDebugString("start False\n");
-	}
+	OutputDebugString("start true\n");
+	
 	//GameProccess();
 	//m_CGame.AutoPosition();
 }
@@ -472,9 +467,9 @@ void CClientRoSoDlg::ekstrakData(CString data)
 		&idF, &fx, &fy, &ft);
 	//OutputDebugString(data);
 	//////////hahn (31/7)
-	m_CGame.setPos(Bx, By);
-	//m_CGame.Ball.position.X = Bx;
-	//m_CGame.Ball.position.Y = By;
+	//m_CGame.setPos(Bx, By);
+	m_CGame.Ball.position.X = Bx;
+	m_CGame.Ball.position.Y = By;
 	m_CGame.HomeRobot[0].position.X = ax;
 	m_CGame.HomeRobot[0].position.Y = ay;
 	m_CGame.HomeRobot[0].Angle		= at;

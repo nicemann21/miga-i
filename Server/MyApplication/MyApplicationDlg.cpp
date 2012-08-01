@@ -92,7 +92,7 @@ BOOL CMyApplicationDlg::OnInitDialog()
 	setting.Create(IDD_SETTING_DIALOG, this);
 	imgProc = CImageProc();
 //	setting = CSettingDialog();
-	
+	/*
 	homeTeamColor	= cv::Vec3b(87, 176, 193);
 	oppoTeamColor	= cv::Vec3b(255, 0, 255);
 	ballColor		= cv::Vec3b(62, 81, 213);
@@ -100,7 +100,14 @@ BOOL CMyApplicationDlg::OnInitDialog()
 	homeSecondColor = cv::Vec3b(145, 227, 140);
 	homeThirdColor	= cv::Vec3b(200, 100, 0);
 	secondaryColor	= cv::Vec3b(210, 210, 210);
-	
+	*/
+	homeTeamColor	= cv::Vec3b(2, 0, 253);
+	oppoTeamColor	= cv::Vec3b(253, 1, 1);
+	ballColor		= cv::Vec3b(254, 101, 2);
+	homeFirstColor	= cv::Vec3b(255, 254, 2);
+	homeSecondColor = cv::Vec3b(0, 128, 1);
+	homeThirdColor	= cv::Vec3b(254, 1, 252);
+	secondaryColor	= cv::Vec3b(255, 254, 255);
 
 	CString temp;
 	temp.Format("\ndi init\nball: %d %d %d\n \
@@ -380,7 +387,7 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 	//	MbufInquire(MilImage, M_HOST_ADDRESS, &TheImage->imageData);
 		MbufInquire(MilImage, M_HOST_ADDRESS, &MatImage.data);
 #else
-		cv::Mat img = cv::imread("gb5--.jpg");
+		cv::Mat img = cv::imread("lapang4.png");
 #endif
 		/*
 		//OnBnClickedProcess();
@@ -447,7 +454,7 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 		dataPosisi.Append("\n");
 		tmp.Format("[%i] %s",counterData, dataPosisi);
 		dataPosisi = tmp;
-		//OutputDebugString(tmp);
+		OutputDebugString(tmp);
 		//kirim
 		kirimData();
 		imgProc.resetData();
@@ -642,7 +649,7 @@ void CMyApplicationDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		int yy = MatImage.at<cv::Vec3b>(y, x)[1];
 		int zz = MatImage.at<cv::Vec3b>(y, x)[2];
 		st.Format(_T("B: %3d \t G : %3d \t R : %3d \r\n"), xx, yy, zz);
-		OutputDebugString(st);
+		//OutputDebugString(st);
 		/*
 		cvtColor(MatImage, tempImage, CV_BGR2YCrCb);
 		xx = tempImage.at<cv::Vec3b>(y, x)[0];
