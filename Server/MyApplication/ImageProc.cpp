@@ -292,8 +292,8 @@ void CImageProc::findHomeRobot( void ){
 
 		CString s = _T("");
 		//s.Format( _T("Team %ld location : %ld,%ld %ld degree\n"), x, locx, locy, (angle>=0?angle:(angle+360)));
-		s.Format( _T("first[%d] %ld %ld %ld %ld | "), i, x, locx, locy, (angle>=0?angle:(angle+360)));
-		OutputDebugString(s);
+		s.Format( _T("%ld %ld %ld %ld | "), x, locx, locy, (angle>=0?angle:(angle+360)));
+		//OutputDebugString(s);
 		outputString.Append(s);
 
 		//cout << x << " : " << dsy << " " << dsx << " : " << a << endl;

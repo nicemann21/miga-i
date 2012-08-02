@@ -8,6 +8,7 @@
 #include "serialclass.h"
 #include "comm.h"
 
+
 bool variable_setteam_home = false ;
 bool variable_setteam_away = false ;
 bool variable_radio_1 = false ;
@@ -1042,127 +1043,59 @@ void CCallibration::OnEnChangeEdit1()
 void CCallibration::OnBnClickedButton8()
 {
 	// TODO: Add your control notification handler code here
-	if (variable_setteam_home == true)
+	Serial serial("\\\\.\\COM17");
+	char data[17];
+	CString mVl, mVr, sVr, sVl;
+	char arahL= '+', arahR = '+';
+	m_robot1_L.GetWindowText(mVl);	
+	m_robot1_R.GetWindowText(mVr);
+	int vl, vr;
+	vl = atoi(mVl);
+	vr = atoi(mVr);
+	if(vl < 0) arahL = '-';
+	if(vr < 0) arahR = '+';
+	vl = abs(vl);
+	vr = abs(vr);
+	if(vl < 100)
 	{
-		if (variable_radio_1==true)
-		{
-		char temp[10];
-	
-	UpdateData(1);
-	Serial serial("\\\\.\\COM7");
-	//ambil data form
-	CString m1l, m1r, arah, ml,mr, hasil;
-	m_robot1_R.GetWindowText(m1r);
-	m_robot1_L.GetWindowText(m1l);
-	int vl,vr;
-	vl = atoi(m1l);
-	vr = atoi(m1r);
-	//tentukan arah, dilihat dari kecepatan
-	if(vl < 0 && vr < 0) 
-	{
-		arah = "3";
-	}else if(vl < 0 && vr >= 0)
-	{
-		arah = "1";
-	}else if(vl >= 0 && vr < 0)
-	{
-		arah = "2";
-	}else {
-		arah = "0";
-	}
-	//konvert dari int ke cstring
-	ml.Format("%i",abs(vl));
-	mr.Format("%i",abs(vr));
-	hasil.Format("kecepatan kiri: %i, kec kanan: %i, arah: %s\nIni hasil char: %s %s\n\n",vl, vr, arah, ml, mr);
-	OutputDebugString(hasil);
-	//masukan variable ke temp yang akan dikirim ke robot
-	temp[0] = '#';
-	temp[1] = 'X';
-	temp[2] = 'A';
-	temp[3] = arah[0];
-	for(int i = 4;i<7;i++)
-	{
-		temp[i] = ml[i-4];
-	}
-	for(int i = 7;i<10;i++)
-	{
-		temp[i] = mr[i-7];
-	}
-	OutputDebugString(temp);
-
-	    if(serial.IsConnected())
-		{
-			//MessageBox("KONEKKKK","sssssssssssssss",0);
-			serial.WriteData(temp,10);
-			
-		} 
+		if(vl<10)
+			sVl.Format("00%d",vl);
 		else 
-		{
-			MessageBox("TRANSMITTER BELUM TERPASANG","",0);
-		}
-	//m_output = m_robot_1_R;
-	UpdateData(0);
-}
+			sVl.Format("0%d",vl);
 	}
-	if (variable_radio_2==true)
+	if(vr < 100)
 	{
-		char temp[10];
-		UpdateData(1);
-		Serial serial("\\\\.\\COM7");
-		CString m1l, m1r, arah, ml,mr, hasil;
-	m_robot2_R.GetWindowText(m1r);
-	m_robot2_L.GetWindowText(m1l);
-	int vl,vr;
-	vl = atoi(m1l);
-	vr = atoi(m1r);
-	//tentukan arah, dilihat dari kecepatan
-	if(vl < 0 && vr < 0) 
-	{
-		arah = "3";
-	}else if(vl < 0 && vr >= 0)
-	{
-		arah = "1";
-	}else if(vl >= 0 && vr < 0)
-	{
-		arah = "2";
-	}else {
-		arah = "0";
-	}
-	//konvert dari int ke cstring
-	ml.Format("%i",abs(vl));
-	mr.Format("%i",abs(vr));
-	hasil.Format("kecepatan kiri: %i, kec kanan: %i, arah: %s\nIni hasil char: %s %s\n\n",vl, vr, arah, ml, mr);
-	OutputDebugString(hasil);
-	//masukan variable ke temp yang akan dikirim ke robot
-	temp[0] = '#';
-	temp[1] = 'X';
-	temp[2] = 'B';
-	temp[3] = arah[0];
-	for(int i = 4;i<7;i++)
-	{
-		temp[i] = ml[i-4];
-	}
-	for(int i = 7;i<10;i++)
-	{
-		temp[i] = mr[i-7];
-	}
-	OutputDebugString(temp);
-
-	    if(serial.IsConnected())
-		{
-			//MessageBox("KONEKKKK","sssssssssssssss",0);
-			serial.WriteData(temp,10);
-			
-		} 
+		if(vr<10)
+			sVr.Format("00%d",vr);
 		else 
-		{
-			MessageBox("TRANSMITTER BELUM TERPASANG","",0);
-		}
-	//m_output = m_robot_1_R;
-	UpdateData(0);
-}
-
+			sVr.Format("0%d",vr);
 	}
+	data[0] = '#';
+	data[1] = 'A';
+	data[2] = arahL;
+	data[3] = 'C';
+	data[4] = sVr[0];
+	data[5] = 'C';
+	data[6] = sVr[1];
+	data[7] = 'C';
+	data[8] = sVr[2];
+	data[9] = 'C';
+	data[10] = arahR;
+	data[11] = 'C';
+	data[12] = sVl[0];
+	data[13] = 'C';
+	data[14] = sVl[1];
+	data[15] = 'C';
+	data[16] = sVl[2];
+
+	OutputDebugString(data);
+
+	if(serial.IsConnected())
+	{
+		serial.WriteData(data,17);
+	}
+
+}
 
 
 

@@ -387,7 +387,7 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 	//	MbufInquire(MilImage, M_HOST_ADDRESS, &TheImage->imageData);
 		MbufInquire(MilImage, M_HOST_ADDRESS, &MatImage.data);
 #else
-		cv::Mat img = cv::imread("lapang4.png");
+		cv::Mat img = cv::imread("lapang5.png");
 #endif
 		/*
 		//OnBnClickedProcess();
@@ -454,7 +454,7 @@ void CMyApplicationDlg::OnTimer(UINT_PTR nIDEvent)
 		dataPosisi.Append("\n");
 		tmp.Format("[%i] %s",counterData, dataPosisi);
 		dataPosisi = tmp;
-		OutputDebugString(tmp);
+		//OutputDebugString(tmp);
 		//kirim
 		kirimData();
 		imgProc.resetData();
