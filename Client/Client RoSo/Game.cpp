@@ -7,6 +7,7 @@
 #define M_PI 3.14
 
 Serial serial("\\\\.\\COM17");
+char dataSend[5][17];
 
 CGame::CGame()
 {
@@ -23,6 +24,16 @@ CGame::CGame()
 	}
 	Ball.position.X = 0;
 	Ball.position.Y = 0;
+	//data yang akan dikirim ke robot disimpan di sini
+	char x[6]= {"ABCDE"};
+	for(int i=0;i<5;i++)
+	{
+		for (int j=0;j<17;j++)
+		{
+			dataSend[i][j] = (j ==0) ? '#':((j ==1) ? x[i]:'0');
+		//	dataSend[i][j] = (j ==1) ? x[i]:'0';
+		}
+	}
 }
 
 CGame::~CGame()
@@ -63,13 +74,21 @@ void CGame::Strategy()
 	//OutputDebugString(tes);
 	//Position(0,556,37);
 	FollowBall(0);
+	Angle2(1,Ball.position.X, Ball.position.Y);
 	//Angle2(0,Ball.position.X, Ball.position.Y);
+	SendCommand(dataSend[0]);
 
 }
 
-void CGame::SendCommand(BYTE *Data)
+void CGame::SendCommand(char *data)
 {
-
+	//030812 (hahn)
+	OutputDebugString(data);
+	if(serial.IsConnected())
+	{
+	//	serial.WriteData(data);
+	}
+	
 }
 
 void CGame::Velocity(int whichRobot)
@@ -77,9 +96,15 @@ void CGame::Velocity(int whichRobot)
 	//OutputDebugString("tes klik velocity berhasil\n");
 	CString v;
 	CString sVl, sVr;
-	char data[17];
+	//char data[17];
 	char arahL ='+', arahR = '-' ;
 	int vl, vr;
+	//trik supaya data kebaca di robot?
+	for(int i=3;i<16;i+=2)
+	{
+		//data[i] = 'C';//
+		dataSend[whichRobot][i] = 'C';
+	}
 	vl = HomeRobot[whichRobot].VelocityLeft;
 	vr = HomeRobot[whichRobot].VelocityRight;
 	v.Format("Kecepatan kiri-kanan: %d, %d\n",vl, vr);
@@ -91,22 +116,10 @@ void CGame::Velocity(int whichRobot)
 	if ( vr < -255) vr = -255;
 	if ( vl < -255) vl = -255;
 	//tentukan arahnya
-	if(vl< 0)
-	{
-		arahL = '-';
-		vl = abs(vl);
-	}else
-	{
-		arahL = '+';
-	}
-	if(vr < 0)
-	{
-		arahR = '-';
-		vr= abs(vr);
-	} else
-	{
-		arahR = '+';
-	}
+	arahL = (vl< 0)? '-':'+';
+	arahR = (vr< 0)? '-':'+';
+	vl = abs(vl);
+	vr = abs(vr);
 	//dibikin ke string?
 	if(vl < 100)
 	{
@@ -125,35 +138,21 @@ void CGame::Velocity(int whichRobot)
 	
 	v.Format("\nkiri kanan: %s %s arah\n",sVl, sVr);
 	//OutputDebugString(v);
-	//tes dulu kirim di sini
-	data[0] = '#';
-	data[1] = 'A';
-	data[2] = arahR;
-	data[3] = 'C';
-	data[4] = sVr[0];
-	data[5] = 'C';
-	data[6] = sVr[1];
-	data[7] = 'C';
-	data[8] = sVr[2];
-	data[9] = 'C';
-	data[10] = arahL;
-	data[11] = 'C';
-	data[12] = sVl[0];
-	data[13] = 'C';
-	data[14] = sVl[1];
-	data[15] = 'C';
-	data[16] = sVl[2];
+	//tentukan ID
+	char robotID[6] = {"ABCDE"};
+	dataSend[whichRobot][0] = '#';
+	dataSend[whichRobot][1] = robotID[whichRobot];
+	dataSend[whichRobot][2] = arahR;
+	dataSend[whichRobot][4] = sVr[0];
+	dataSend[whichRobot][6] = sVr[1];
+	dataSend[whichRobot][8] = sVr[2];
+	dataSend[whichRobot][10] = arahL;
+	dataSend[whichRobot][12] = sVl[0];
+	dataSend[whichRobot][14] = sVl[1];
+	dataSend[whichRobot][16] = sVl[2];
+	//OutputDebugString(dataSend[whichRobot]);
+	OutputDebugString("\n");
 
-	OutputDebugString(data);
-	if(serial.IsConnected())
-	{
-		serial.WriteData(data,17);	
-	}else
-	{
-		//AfxMessageBox("ERR");
-	}
-
-	
 }
 
 void CGame::AutoPosition()
@@ -242,8 +241,6 @@ void CGame::Position(int whichRobot, int x, int y)
 	dy = y - HomeRobot[whichRobot].position.Y;
 	d_e = sqrt(dx*dx + dy*dy);//jarak robot ke x,y
 	///asal
-	double dde;
-		CString c;
 	//ambil sudutnya
 	if (dx == 0 && dy == 0)
 		des_angle = 90;

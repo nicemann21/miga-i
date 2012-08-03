@@ -376,7 +376,7 @@ void CClientRoSoDlg::OnBnClickedStartgame()
 {
 	// TODO: menjalankan game
 	m_GameStart = true;
-	OutputDebugString("start true\n");
+	//OutputDebugString("start true\n");
 	
 	//GameProccess();
 	//m_CGame.AutoPosition();

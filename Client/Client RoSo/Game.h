@@ -44,6 +44,7 @@ public:
 	BallDPosition Ball;
 	void AutoPosition();
 	void SendCommand(BYTE *Data);	//ini untuk mengirimkan data ke robot
+	void SendCommand(char *data);
 	void Strategy();
 	void setPos(int x, int y);
 
@@ -63,6 +64,6 @@ private:
 	void RobotStop(int whichRobot);	//menghentikan robot[i]
 
 
-	CComm m_Comm;
+	CComm m_Comm; //ini kepake ga sih? lupa -__-
 
 };
