@@ -435,7 +435,7 @@ void CClientRoSoDlg::UpdateClientData()
 	{
 		m_iocp.m_ContextMap.GetNextAssoc(pos,ikey,pContext);
 		m_clientID = pContext->m_Socket;
-		OutputDebugString(""+m_clientID);
+		//OutputDebugString(""+m_clientID);
 	}
 	//pContext = m_iocp.FindClient(m_clientID);
 	if(pContext!=NULL)

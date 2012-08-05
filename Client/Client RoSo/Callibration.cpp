@@ -27,9 +27,11 @@ IMPLEMENT_DYNAMIC(CCallibration, CDialog)
 
 CCallibration::CCallibration(CWnd* pParent /*=NULL*/)
 	: CDialog(CCallibration::IDD, pParent)
-	, m_robot_1_R(0)
+	, m_robot_1_R(100)
 	, m_output(0)
 {
+	//m_robot1_L.SetWindowText("10");
+	//m_robot1_R.SetWindowText("20");
 
 }
 
@@ -182,7 +184,7 @@ void CCallibration::OnBnClickedButton3()
 			char variabel[]="#XA0100110";
 			MessageBox(variabel);
 
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData(variabel,10);		
@@ -1062,6 +1064,9 @@ void CCallibration::OnBnClickedButton8()
 			sVl.Format("00%d",vl);
 		else 
 			sVl.Format("0%d",vl);
+	}else
+	{
+		sVl.Format("%d",vl);
 	}
 	if(vr < 100)
 	{
@@ -1069,6 +1074,10 @@ void CCallibration::OnBnClickedButton8()
 			sVr.Format("00%d",vr);
 		else 
 			sVr.Format("0%d",vr);
+	}
+	else
+	{
+		sVr.Format("%d",vr);
 	}
 	data[0] = '#';
 	data[1] = 'A';
@@ -1093,6 +1102,10 @@ void CCallibration::OnBnClickedButton8()
 	if(serial.IsConnected())
 	{
 		serial.WriteData(data,17);
+	}
+	else
+	{
+		OutputDebugString("EROR NAHA??\n");
 	}
 
 }

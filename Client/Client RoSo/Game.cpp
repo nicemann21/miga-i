@@ -73,9 +73,9 @@ void CGame::Strategy()
 		HomeRobot[4].position.X, HomeRobot[4].position.Y, HomeRobot[4].Angle);
 	//OutputDebugString(tes);
 	//Position(0,556,37);
-	FollowBall(0);
-	Angle2(1,Ball.position.X, Ball.position.Y);
-	//Angle2(0,Ball.position.X, Ball.position.Y);
+	//FollowBall(0);
+	//Angle2(1,Ball.position.X, Ball.position.Y);
+	Angle2(0,Ball.position.X, Ball.position.Y);
 	SendCommand(dataSend[0]);
 
 }
@@ -86,7 +86,11 @@ void CGame::SendCommand(char *data)
 	OutputDebugString(data);
 	if(serial.IsConnected())
 	{
-	//	serial.WriteData(data);
+		serial.WriteData(data,85);
+	}
+	else
+	{
+		OutputDebugString("eror");
 	}
 	
 }
@@ -109,8 +113,8 @@ void CGame::Velocity(int whichRobot)
 	vr = HomeRobot[whichRobot].VelocityRight;
 	v.Format("Kecepatan kiri-kanan: %d, %d\n",vl, vr);
 	OutputDebugString(v);
-	//vl*=5;//percobaan, karena nilainya sangat kecil ternyata (bergantung Ka?)
-	//vr*=5;//percobaan
+	//vl*=2;//percobaan, karena nilainya sangat kecil ternyata (bergantung Ka?)
+	//vr*=2;//percobaan
 	if ( vr > 255 ) vr = 255;	//Velocity Limte
 	if ( vl > 255 ) vl = 255;
 	if ( vr < -255) vr = -255;
@@ -152,6 +156,14 @@ void CGame::Velocity(int whichRobot)
 	dataSend[whichRobot][16] = sVl[2];
 	//OutputDebugString(dataSend[whichRobot]);
 	OutputDebugString("\n");
+	//if(serial.IsConnected())
+	//{
+	//	serial.WriteData(dataSend[whichRobot],17);
+	//}
+	//else
+	//{
+	//	OutputDebugString("Teu kabaca\n");
+	//}
 
 }
 
@@ -236,7 +248,7 @@ void CGame::Position(int whichRobot, int x, int y)
 {
 	//TODO:menggerakkan robot[whichRobot] ke (x,y)
 	int des_angle = 0, theta_e = 0, d_angle = 0, vl = 0, vr = 0, vc = 70;
-	double dx, dy, d_e, Ka = 10.0/90.0; //Ka itu apa?
+	double dx, dy, d_e, Ka = 10.0/60.0; //Ka itu apa?
 	dx = x - HomeRobot[whichRobot].position.X;
 	dy = y - HomeRobot[whichRobot].position.Y;
 	d_e = sqrt(dx*dx + dy*dy);//jarak robot ke x,y
