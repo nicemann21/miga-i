@@ -390,6 +390,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 	//IP ditentukan langsung. harusnya bisa diisi sendiri
 	m_IPServer.GetWindowText(m_Alamat);
 	if(m_Alamat.IsEmpty())
+		//m_Alamat = "167.205.66.85";
 		m_Alamat = "127.0.0.1";
 	if(isKoneksi==FALSE)
 	{

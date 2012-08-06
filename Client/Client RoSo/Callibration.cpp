@@ -6,7 +6,6 @@
 #include "ClientRosoDlg.h"
 #include "Callibration.h"
 #include "serialclass.h"
-#include "comm.h"
 
 
 bool variable_setteam_home = false ;
@@ -177,176 +176,186 @@ void CCallibration::OnBnClickedButton3()
 {
 //	variabel[3] = '0';
 	// Button W
-	if (variable_setteam_home == true)
+//	if (variable_setteam_home == true)
+//	{
+//		if (variable_radio_1==true)
+//		{
+//			char variabel[]="#X+C1C2C3C+C1C2C3";
+//			//MessageBox(variabel);
+//
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData(variabel,17);		
+//			}
+//			else
+//			{
+//				//MessageBox ("Transmitter not connected","",0);
+//				OutputDebugString("W\n");
+//			}
+//		}
+//		if (variable_radio_2==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#XC0000000",10);
+//
+///*				variabel[4]='0';
+//				variabel[5]='0';
+//				variabel[6]='0';
+//				variabel[7]='0';
+//				variabel[8]='0';
+//				variabel[9]='0';
+//				serial.WriteData(variabel,10);
+//				*/
+//
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_3==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#XC0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_4==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#XD0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_5==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#XE0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_6==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#XA0100100",10);
+//				serial.WriteData("#XB0100100",10);
+//				serial.WriteData("#XC0100100",10);
+//				serial.WriteData("#XD0100100",10);
+//				serial.WriteData("#XE0100100",10);
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//	}
+//	if (variable_setteam_away == true)
+//	{
+//		if (variable_radio_1==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YA0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_2==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YB0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_3==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YC0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_4==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YD0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_5==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YE0100100",10);		
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//		if (variable_radio_1==true)
+//		{
+//			Serial serial("\\\\.\\COM17");
+//			if (serial.IsConnected())
+//			{
+//				serial.WriteData("#YA0100100",10);
+//				serial.WriteData("#YB0100100",10);
+//				serial.WriteData("#YC0100100",10);
+//				serial.WriteData("#YD0100100",10);
+//				serial.WriteData("#YE0100100",10);
+//			}
+//			else
+//			{
+//				MessageBox ("Transmitter not connected","",0);
+//			}
+//		}
+//	}
+	char vData[19] = "#A+C1C4C0C+C2C2C1C";
+	Serial serial("\\\\.\\COM17");
+	if(serial.IsConnected())
 	{
-		if (variable_radio_1==true)
-		{
-			char variabel[]="#XA0100110";
-			MessageBox(variabel);
-
-			Serial serial("\\\\.\\COM17");
-			if (serial.IsConnected())
-			{
-				serial.WriteData(variabel,10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_2==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#XC0000000",10);
-
-/*				variabel[4]='0';
-				variabel[5]='0';
-				variabel[6]='0';
-				variabel[7]='0';
-				variabel[8]='0';
-				variabel[9]='0';
-				serial.WriteData(variabel,10);
-				*/
-
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_3==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#XC0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_4==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#XD0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_5==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#XE0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_6==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#XA0100100",10);
-				serial.WriteData("#XB0100100",10);
-				serial.WriteData("#XC0100100",10);
-				serial.WriteData("#XD0100100",10);
-				serial.WriteData("#XE0100100",10);
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-	}
-	if (variable_setteam_away == true)
+		serial.WriteData(vData,85);
+	}else
 	{
-		if (variable_radio_1==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YA0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_2==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YB0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_3==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YC0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_4==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YD0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_5==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YE0100100",10);		
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
-		if (variable_radio_1==true)
-		{
-			Serial serial("\\\\.\\COM7");
-			if (serial.IsConnected())
-			{
-				serial.WriteData("#YA0100100",10);
-				serial.WriteData("#YB0100100",10);
-				serial.WriteData("#YC0100100",10);
-				serial.WriteData("#YD0100100",10);
-				serial.WriteData("#YE0100100",10);
-			}
-			else
-			{
-				MessageBox ("Transmitter not connected","",0);
-			}
-		}
+		OutputDebugString("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\n");
 	}
 
 }
@@ -359,7 +368,7 @@ void CCallibration::OnBnClickedButton4()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA1100100",10);		
@@ -371,7 +380,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XB1100100",10);		
@@ -383,7 +392,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XC1100100",10);		
@@ -395,7 +404,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XD1100100",10);		
@@ -407,7 +416,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XE1100100",10);		
@@ -419,7 +428,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_6==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA1100100",10);
@@ -438,7 +447,7 @@ void CCallibration::OnBnClickedButton4()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);		
@@ -450,7 +459,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YB0100100",10);		
@@ -462,7 +471,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YC0100100",10);		
@@ -474,7 +483,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YD0100100",10);		
@@ -486,7 +495,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YE0100100",10);		
@@ -498,7 +507,7 @@ void CCallibration::OnBnClickedButton4()
 		}
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);
@@ -525,7 +534,7 @@ void CCallibration::OnBnClickedButton5()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA2100100",10);		
@@ -537,7 +546,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XB2100100",10);		
@@ -549,7 +558,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XC2100100",10);		
@@ -561,7 +570,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XD2100100",10);		
@@ -573,7 +582,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XE2100100",10);		
@@ -585,7 +594,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_6==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA2100100",10);
@@ -604,7 +613,7 @@ void CCallibration::OnBnClickedButton5()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);		
@@ -616,7 +625,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YB0100100",10);		
@@ -628,7 +637,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YC0100100",10);		
@@ -640,7 +649,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YD0100100",10);		
@@ -652,7 +661,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YE0100100",10);		
@@ -664,7 +673,7 @@ void CCallibration::OnBnClickedButton5()
 		}
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);
@@ -690,7 +699,7 @@ void CCallibration::OnBnClickedButton6()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA3100110",10);		
@@ -702,7 +711,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XB3100100",10);		
@@ -714,7 +723,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XC3100100",10);		
@@ -726,7 +735,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XD3100100",10);		
@@ -738,7 +747,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XE3100100",10);		
@@ -750,7 +759,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_6==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA3100100",10);
@@ -769,7 +778,7 @@ void CCallibration::OnBnClickedButton6()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);		
@@ -781,7 +790,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YB0100100",10);		
@@ -793,7 +802,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YC0100100",10);		
@@ -805,7 +814,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YD0100100",10);		
@@ -817,7 +826,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YE0100100",10);		
@@ -829,7 +838,7 @@ void CCallibration::OnBnClickedButton6()
 		}
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA0100100",10);
@@ -856,7 +865,7 @@ void CCallibration::OnBnClickedButton7()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA4000000",10);		
@@ -868,7 +877,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XB4000000",10);		
@@ -880,7 +889,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XC4000000",10);		
@@ -892,7 +901,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XD4000000",10);		
@@ -904,7 +913,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XE4000000",10);		
@@ -916,7 +925,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_6==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#XA3000000",10);
@@ -935,7 +944,7 @@ void CCallibration::OnBnClickedButton7()
 	{
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA4000000",10);		
@@ -947,7 +956,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_2==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YB4000000",10);		
@@ -959,7 +968,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_3==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YC4000000",10);		
@@ -971,7 +980,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_4==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YD4000000",10);		
@@ -983,7 +992,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_5==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YE4000000",10);		
@@ -995,7 +1004,7 @@ void CCallibration::OnBnClickedButton7()
 		}
 		if (variable_radio_1==true)
 		{
-			Serial serial("\\\\.\\COM7");
+			Serial serial("\\\\.\\COM17");
 			if (serial.IsConnected())
 			{
 				serial.WriteData("#YA4000000",10);
