@@ -369,36 +369,54 @@ void CSettingDialog::loadColorSettings()
 	//hasil load dimasukkan ke variable;
 	//BallColor ball;
 	//RobotColor teamColor, oppcolor, firstColor[3], secColor;
+	OutputDebugString(colorString);
+//	sscanf(colorString,
+//"#file configuration\r\nball color:\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n\
+//%*s\t %d %d %d\r\n",
+//		&ball.red, &ball.green, &ball.blue,
+//		&teamColor.red, &teamColor.green, &teamColor.blue,
+//		&firstColor[0].red, &firstColor[0].green, &firstColor[0].blue,
+//		&firstColor[1].red, &firstColor[1].green, &firstColor[1].blue,
+//		&firstColor[2].red, &firstColor[2].green, &firstColor[2].blue,
+//		&secColor.red, &secColor.green, &secColor.blue,
+//		&oppColor.red, &oppColor.green, &oppColor.blue);
 
+	//int q=100,w=100,e=100,r=100,t=100,y=100,u=100,i=100,o=100,p;
+	int q,w,e,r,t,y,u,i,o;
 	sscanf(colorString,
-		"#file configuration\nball color:\t %d %d %d\n \
-		teamColor:\t %d %d %d\n \
-		firstColor[0]:\t %d %d %d\n \
-		firstColor[1]:\t %d %d %d\n \
-		firstColor[2]:\t %d %d %d\n \
-		secColor:\t %d %d %d\n \
-		oppColor:\t %d %d %d\n",
+"#file configuration\r\nball color:\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n\
+%*s\t %d %d %d\r\n",
 		&ball.red, &ball.green, &ball.blue,
 		&teamColor.red, &teamColor.green, &teamColor.blue,
-		&firstColor[0].red, &firstColor[0].green, &firstColor[0].blue,
+		&q,&w,&e,//&firstColor[0].red, &firstColor[0].green, &firstColor[0].blue,
 		&firstColor[1].red, &firstColor[1].green, &firstColor[1].blue,
 		&firstColor[2].red, &firstColor[2].green, &firstColor[2].blue,
 		&secColor.red, &secColor.green, &secColor.blue,
 		&oppColor.red, &oppColor.green, &oppColor.blue);
-	
+
 	//tes. bisa ternyata
 	temp.Format("\n\nball: %d %d %d\n \
 		teamColor:\t %d %d %d\n \
-		firstColor[0]:\t %d %d %d\n \
-		firstColor[1]:\t %d %d %d\n \
-		firstColor[2]:\t %d %d %d\n \
+		firstColor0:\t %d %d %d\n \
+		firstColor1:\t %d %d %d\n \
+		firstColor2:\t %d %d %d\n \
 		secColor:\t %d %d %d\n \
 		oppColor:\t %d %d %d\n",
 		ball.red, ball.green, ball.blue,
 		teamColor.red, teamColor.green, teamColor.blue,
-		firstColor[0].red, firstColor[0].green, firstColor[0].blue,
-		firstColor[1].red, firstColor[1].green, firstColor[1].blue,
-		firstColor[2].red, firstColor[2].green, firstColor[2].blue,
+		q,w,e, //firstColor[0].red, firstColor[0].green, firstColor[0].blue,
+		/*r,t,y,*/ firstColor[1].red, firstColor[1].green, firstColor[1].blue,
+		/*u,i,o,*/ firstColor[2].red, firstColor[2].green, firstColor[2].blue,
 		secColor.red, secColor.green, secColor.blue,
 		oppColor.red, oppColor.green, oppColor.blue);
 	OutputDebugString(temp);
@@ -411,9 +429,9 @@ void CSettingDialog::loadColorSettings()
 	m_GreenField2.SetPos(teamColor.green);
 	m_BlueField2.SetPos(teamColor.blue);
 
-	m_RedField3.SetPos(firstColor[0].red);
-	m_GreenField3.SetPos(firstColor[0].green);
-	m_BlueField3.SetPos(firstColor[0].blue);
+	m_RedField3.SetPos(q);//firstColor[0].red);
+	m_GreenField3.SetPos(w);//firstColor[0].green);
+	m_BlueField3.SetPos(e);//firstColor[0].blue);
 
 	m_RedField4.SetPos(firstColor[1].red);
 	m_GreenField4.SetPos(firstColor[1].green);

@@ -447,61 +447,91 @@ void CClientRoSoDlg::UpdateClientData()
 	}
 	m_iocp.m_ContextMapLock.Unlock();
 	//OutputDebugString(m_sReceivedTxt);
-	ekstrakData(m_teks);
+	if(!m_teks.IsEmpty())
+		ekstrakData(m_teks);
 	UpdateData(FALSE);
 }
 
 void CClientRoSoDlg::ekstrakData(CString data)
 {
-	//TODO: ini baru dummy. 
-	
+	//TODO: ekstrak data. 
+	//diubah tgl 8/8/12
+	typedef struct{
+		int id;
+		int x;
+		int y;
+		int t;
+	} RPos;
+	RPos r[6];
 	int  Bx, By, count, idA, ax, ay, at, idB, bx, by, bt, idC, cx,cy,ct, idD, dx, dy, dt, idE, ex, ey, et, idF, fx, fy, ft;
 	CString hasil ="";
 	//sscanf(data,"[%d] ball %d %d | %d %d %d %d",&count, &bx, &by, &idA, &ax, &ay, &at);
 	sscanf(data,"[%d] ball %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d",
 		&count, &Bx, &By, 
+		&r[0].id, &r[0].x, &r[0].y, &r[0].t,
+		&r[1].id, &r[1].x, &r[1].y, &r[1].t, 
+		&r[2].id, &r[2].x, &r[2].y, &r[2].t, 
+		&r[3].id, &r[3].x, &r[3].y, &r[3].t, 
+		&r[4].id, &r[4].x, &r[4].y, &r[4].t, 
+		&r[5].id, &r[5].x, &r[5].y, &r[5].t); 
+
+		/*&idD, &dx, &dy, &dt,
 		&idA, &ax, &ay, &at, 
+		&idE, &ex, &ey, &et,
 		&idB, &bx, &by, &bt,
 		&idC, &cx, &cy, &ct,
-		&idD, &dx, &dy, &dt,
-		&idE, &ex, &ey, &et,
-		&idF, &fx, &fy, &ft);
+		&idF, &fx, &fy, &ft);*/
+
+
 	//OutputDebugString(data);
 	//////////hahn (31/7)
 	//m_CGame.setPos(Bx, By);
 	m_CGame.Ball.position.X = Bx;
 	m_CGame.Ball.position.Y = By;
-	m_CGame.HomeRobot[0].position.X = ax;
-	m_CGame.HomeRobot[0].position.Y = ay;
-	m_CGame.HomeRobot[0].Angle		= at;
-	m_CGame.HomeRobot[1].position.X = bx;
-	m_CGame.HomeRobot[1].position.Y = by;
-	m_CGame.HomeRobot[1].Angle		= bt;
-	m_CGame.HomeRobot[2].position.X = cx;
-	m_CGame.HomeRobot[2].position.Y = cy;
-	m_CGame.HomeRobot[2].Angle		= ct;
-	m_CGame.HomeRobot[3].position.X = dx;
-	m_CGame.HomeRobot[3].position.Y = dy;
-	m_CGame.HomeRobot[3].Angle		= dt;
-	m_CGame.HomeRobot[4].position.X = ex;
-	m_CGame.HomeRobot[4].position.Y = ey;
-	m_CGame.HomeRobot[4].Angle		= et;
-
+	//m_CGame.HomeRobot[0].position.X = ax;
+	//m_CGame.HomeRobot[0].position.Y = ay;
+	//m_CGame.HomeRobot[0].Angle		= at;
+	//m_CGame.HomeRobot[1].position.X = bx;
+	//m_CGame.HomeRobot[1].position.Y = by;
+	//m_CGame.HomeRobot[1].Angle		= bt;
+	//m_CGame.HomeRobot[2].position.X = cx;
+	//m_CGame.HomeRobot[2].position.Y = cy;
+	//m_CGame.HomeRobot[2].Angle		= ct;
+	//m_CGame.HomeRobot[3].position.X = dx;
+	//m_CGame.HomeRobot[3].position.Y = dy;
+	//m_CGame.HomeRobot[3].Angle		= dt;
+	//m_CGame.HomeRobot[4].position.X = ex;
+	//m_CGame.HomeRobot[4].position.Y = ey;
+	//m_CGame.HomeRobot[4].Angle		= et;
+	for(int i=0;i<5;i++)
+	{
+		m_CGame.HomeRobot[i].position.X = r[i].x;
+		m_CGame.HomeRobot[i].position.Y = r[i].y;
+		m_CGame.HomeRobot[i].Angle		= r[i].t;
+	}
 	//////////hahn (31/7)
 
 
-	hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
-		count, bx, by, ax, ay, at);
+	//hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
+	//	count, bx, by, ax, ay, at);
 	//if(!hasil.IsEmpty())
 		//OutputDebugString(hasil);
 	//nambah bisa gerak ga itu si tombol
 	m_R1.MoveWindow(Bx,By,20,20,1);
-	m_R2.MoveWindow(ax,ay,20,20,1);
-	m_R3.MoveWindow(bx,by,20,20,1);
-	m_R4.MoveWindow(cx,cy,20,20,1);
-	m_R5.MoveWindow(dx,dy,20,20,1);
-	m_A1.MoveWindow(ex,ey,20,20,1);
-	m_A2.MoveWindow(fx,fy,20,20,1);
+	//m_R2.MoveWindow(r[1].x,r[1].y,20,20,1);
+	//m_R3.MoveWindow(r[2].x,r[2].y,20,20,1);
+	//m_R4.MoveWindow(r[3].x,r[3].y,20,20,1);
+	//m_R5.MoveWindow(r[4].x,r[4].y,20,20,1);
+	//m_A1.MoveWindow(r[5].x,r[5].y,20,20,1);
+	//m_A2.MoveWindow(fx,fy,20,20,1);
+
+	m_R2.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	m_R3.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	m_R4.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
+	m_R5.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
+	m_A1.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
+	//m_A2.MoveWindow(fx,fy,20,20,1);
+
 
 }
 

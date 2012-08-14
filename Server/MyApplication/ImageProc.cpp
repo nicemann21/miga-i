@@ -123,7 +123,8 @@ void CImageProc::teamAndBallIdentify( void ) {
 	//text = "Ball";
 	sprintf_s( text, "Ball" );
 	putText(MatImage, text , cv::Point(ballColorPoint.x, ballColorPoint.y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
-
+	//8/8/12 
+	CString temp;
 	for(int i=0; i<homeTeamColorPoint.size(); i++){
 		cout<< "Team " << i+1 <<" Location : " 
 			<< homeTeamColorPoint[i].x << "," 
@@ -134,6 +135,8 @@ void CImageProc::teamAndBallIdentify( void ) {
 			  cv::Scalar(255,255,0,0));
 		sprintf_s( text, "T%d", (i+1));
 		//putText(MatImage, text , cv::Point(homeTeamColorPoint[i].x, homeTeamColorPoint[i].y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
+		//temp.Format("ID: %ld (%d, %d)\n",i, homeTeamColorPoint[i].x, homeTeamColorPoint[i].y);
+		//OutputDebugString(temp);
 	}
 
 	for(int i=0; i<oppoTeamColorPoint.size(); i++){
@@ -145,7 +148,7 @@ void CImageProc::teamAndBallIdentify( void ) {
 			  cv::Point(oppoTeamColorPoint[i].x+10, oppoTeamColorPoint[i].y+10), 
 			  cv::Scalar(255,255,0,0));
 		sprintf_s( text, "O%d", (i+1));
-	//	putText(MatImage, text , cv::Point(oppoTeamColorPoint[i].x, oppoTeamColorPoint[i].y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
+		putText(MatImage, text , cv::Point(oppoTeamColorPoint[i].x, oppoTeamColorPoint[i].y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, cv::Scalar(0,0,255));
 	}
 }
 
@@ -294,7 +297,10 @@ void CImageProc::findHomeRobot( void ){
 		//s.Format( _T("Team %ld location : %ld,%ld %ld degree\n"), x, locx, locy, (angle>=0?angle:(angle+360)));
 		s.Format( _T("%ld %ld %ld %ld | "), x, locx, locy, (angle>=0?angle:(angle+360)));
 		//OutputDebugString(s);
-		outputString.Append(s);
+		HomeRobotPos[x-1].x = locx;
+		HomeRobotPos[x-1].y = locy;
+		HomeRobotPos[x-1].t = angle;
+		//outputString.Append(s);
 
 		//cout << x << " : " << dsy << " " << dsx << " : " << a << endl;
 		//cout << "\t" << atan2(-45.0,-45.0)*180/M_PI+360 << endl;
@@ -362,8 +368,11 @@ void CImageProc::findHomeRobot( void ){
 		CString s = _T("");
 		//s.Format( _T("Team %ld location : %ld,%ld %ld degree\n"), x, locx, locy, (angle>=0?angle:(angle+360)));
 		s.Format( _T("%ld %ld %ld %ld | "), x, locx, locy, (angle>=0?angle:(angle+360)));
-		//OutputDebugStringW(s);
-		outputString.Append(s);
+		//OutputDebugString(s);
+		HomeRobotPos[x-1].x = locx;
+		HomeRobotPos[x-1].y = locy;
+		HomeRobotPos[x-1].t = angle;
+		//outputString.Append(s);
 
 		//cout << x << " : " << dsy << " " << dsx << " : " << a << endl;
 		//cout << "\t" << atan2(-45.0,-45.0)*180/M_PI+360 << endl;
@@ -433,6 +442,10 @@ void CImageProc::findHomeRobot( void ){
 		//s.Format( _T("Team %ld location : %ld,%ld %ld degree\n"), x, locx, locy, (angle>=0?angle:(angle+360)));
 		s.Format( _T("%ld %ld %ld %ld | "), x, locx, locy, (angle>=0?angle:(angle+360)));
 		//OutputDebugString(s);
+		HomeRobotPos[x-1].x = locx;
+		HomeRobotPos[x-1].y = locy;
+		HomeRobotPos[x-1].t = angle;
+		//outputString.Append(s);
 
 		//cout << x << " : " << dsy << " " << dsx << " : " << a << endl;
 		//cout << "\t" << atan2(-45.0,-45.0)*180/M_PI+360 << endl;
@@ -487,5 +500,15 @@ void CImageProc::sendData(CString s)
 
 CString CImageProc::getData()
 {
+	//14/08: ambil data posisi robot
+	CString robotpos;
+	robotpos.Format("1 %d %d %d | 2 %d %d %d | 3 %d %d %d | 4 %d %d %d | 5 %d %d %d | 6 %d %d %d",
+		HomeRobotPos[0].x, HomeRobotPos[0].y, HomeRobotPos[0].t,
+		HomeRobotPos[1].x, HomeRobotPos[1].y, HomeRobotPos[1].t,
+		HomeRobotPos[2].x, HomeRobotPos[2].y, HomeRobotPos[2].t,
+		HomeRobotPos[3].x, HomeRobotPos[3].y, HomeRobotPos[3].t,
+		HomeRobotPos[4].x, HomeRobotPos[4].y, HomeRobotPos[4].t,
+		HomeRobotPos[5].x, HomeRobotPos[5].y, HomeRobotPos[5].t);
+	outputString.Append(robotpos);
 	return outputString;
 }
