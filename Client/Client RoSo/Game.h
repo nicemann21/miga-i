@@ -48,6 +48,8 @@ public:
 	void Strategy();
 	void setPos(int x, int y);
 
+	void Velocity(int whichRobot);
+
 	//tes:kejar bola
 	void FollowBall(int robot_id);
 
@@ -55,7 +57,7 @@ public:
 	virtual ~CGame();
 
 private:
-	void Velocity(int whichRobot);
+	//void Velocity(int whichRobot);
 	void Position(int whichRobot, int x, int y);
 	void Angle(int whichRobot, int d_angle);//menentukan sudut berdasarkan sudut yang diminta
 	void Angle2(int whichRobot, double x, double y); //menentukan berdasarkan posisi x,y

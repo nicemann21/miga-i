@@ -5,6 +5,7 @@
 #include "ClientRoSo.h"
 #include "ClientRoSoDlg.h"
 #include "Callibration.h"
+#include "ManualCallibration.h"
 #include <iostream>
 //#include "tinythread.h"
 #include "stdafx.h"
@@ -216,8 +217,11 @@ HCURSOR CClientRoSoDlg::OnQueryDragIcon()
 void CClientRoSoDlg::OnBnClickedButton2()
 {
 	// Callibration
-	CCallibration D1;
-	D1.DoModal();
+	//CCallibration D1;
+	//D1.DoModal();
+	ManualCallibration Mc;
+	Mc.DoModal();
+	
 	
 }
 

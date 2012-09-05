@@ -215,6 +215,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ManualCallibration.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MyIOCP.cpp"
 				>
 			</File>
@@ -274,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\IOCPS.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ManualCallibration.h"
 				>
 			</File>
 			<File
