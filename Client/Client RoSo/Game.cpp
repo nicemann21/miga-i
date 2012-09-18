@@ -73,9 +73,11 @@ void CGame::Strategy()
 	//	HomeRobot[4].position.X, HomeRobot[4].position.Y, HomeRobot[4].Angle);
 	//OutputDebugString(tes);
 	//Position(0,556,37);
-	//FollowBall(0);
-	Angle2(0,Ball.position.X, Ball.position.Y);
+	FollowBall(2);
+	//Angle2(2,Ball.position.X, Ball.position.Y);
 	//Angle2(1,Ball.position.X, Ball.position.Y);
+	//Angle(2,90);
+	//Dribble(2);
 	SendCommand(dataSend[0]);
 
 }
@@ -103,17 +105,29 @@ void CGame::Velocity(int whichRobot)
 	CString sVl, sVr;
 	//char data[17];
 	char arahL ='+', arahR = '-' ;
-	int vl, vr;
+	int vl, vr, lastVl, lastVr, deltaV = 20;
 	//trik supaya data kebaca di robot?
 	for(int i=3;i<16;i+=2)
 	{
 		//data[i] = 'C';//
-		dataSend[whichRobot][i] = 'C';
+		dataSend[whichRobot][i] = 'X';
 	}
+	lastVl = HomeRobot[whichRobot].lastVelocityLeft;
+	lastVr = HomeRobot[whichRobot].lastVelocityRight;
+
 	vl = HomeRobot[whichRobot].VelocityLeft;
 	vr = HomeRobot[whichRobot].VelocityRight;
 	v.Format("Kecepatan kiri-kanan: %d, %d\n",vl, vr);
-	OutputDebugString(v);
+	/*1809)coba cara baru. jika v != 0 dan perbedaannya tidak jauh, maka
+	  pakai kecepatan yang lama. jika peredaannya jauh, ganti kecepatannya
+	*/
+	if(abs(vl-lastVl)<deltaV && abs(vr-lastVr)<deltaV)
+	{
+		OutputDebugString("perbedaan tidak signifikan.. pakai vl vr sebelumnya\n");
+		return;
+	}
+
+	//OutputDebugString(v);
 	//vl*=2;//percobaan, karena nilainya sangat kecil ternyata (bergantung Ka?)
 	//vr = vr * 2;//percobaan
 	if ( vr > 255 ) vr = 255;	//Velocity Limte
@@ -125,8 +139,7 @@ void CGame::Velocity(int whichRobot)
 	arahR = (vr< 0)? '-':'+';
 	vl = abs(vl);
 	vr = abs(vr);
-	//vl += 50;
-	//vr += 50;
+
 	//dibikin ke string?
 	if(vl < 100)
 	{
@@ -165,21 +178,20 @@ void CGame::Velocity(int whichRobot)
 	dataSend[whichRobot][16] = sVl[2];
 	//OutputDebugString(dataSend[whichRobot]);
 	OutputDebugString("\n");
-	//if(serial.IsConnected())
-	//{
-	//	serial.WriteData(dataSend[whichRobot],17);
-	//}
-	//else
-	//{
-	//	OutputDebugString("Teu kabaca\n");
-	//}
+	if(serial.IsConnected())
+	{
+		serial.WriteData(dataSend[whichRobot],17);
+	}
+	else
+	{
+		OutputDebugString("Teu kabaca\n");
+	}
 
 }
 
 void CGame::AutoPosition()
 {
-	OutputDebugString("tes klik Autoposition berhasil\n");
-	Velocity(1);
+	//TODO: Auto position robot. menempatkan posisi robot ketika awal pertandingan/sesudah gol
 }
 
 void CGame::Goalie(int whichRobot)
@@ -198,6 +210,9 @@ void CGame::Angle(int whichRobot, int d_angle)
 		theta_e -= 360;
 	while(theta_e <-180) 
 		theta_e += 360;
+	HomeRobot[whichRobot].lastVelocityLeft  = HomeRobot[whichRobot].VelocityLeft;
+	HomeRobot[whichRobot].lastVelocityRight = HomeRobot[whichRobot].VelocityRight;
+
 	HomeRobot[whichRobot].VelocityLeft	= (int)(-Kp*(double)theta_e);
 	HomeRobot[whichRobot].VelocityRight	= (int)(Kp*(double)theta_e);
 
@@ -207,7 +222,7 @@ void CGame::Angle(int whichRobot, int d_angle)
 void CGame::Angle2(int whichRobot, double x, double y)
 {
 	double dx, dy, de, d_angle, theta_e;
-	double Kp = 1;
+	double Kp = 3.2;
 	CString tmp, tmp2;
 
 	//dianggap id robot sudah tau
@@ -231,8 +246,16 @@ void CGame::Angle2(int whichRobot, double x, double y)
 		theta_e -= 360;
 	while(theta_e <-180) 
 		theta_e += 360;
-	HomeRobot[whichRobot].VelocityLeft	= (int)(-Kp*(double)theta_e);
-	HomeRobot[whichRobot].VelocityRight	= (int)(Kp*(double)theta_e);
+	//nambah
+	if(abs(theta_e)<3) {
+		RobotStop(whichRobot);
+		return;
+	}
+	HomeRobot[whichRobot].lastVelocityLeft  = HomeRobot[whichRobot].VelocityLeft;
+	HomeRobot[whichRobot].lastVelocityRight = HomeRobot[whichRobot].VelocityRight;
+
+	HomeRobot[whichRobot].VelocityLeft	= (int)(Kp*(double)theta_e);
+	HomeRobot[whichRobot].VelocityRight	= (int)(-Kp*(double)theta_e);
 	tmp2.Format("x,y: (%lf,%lf) x0,y0: (%li,%li)\n",x,y,HomeRobot[whichRobot].position.X, HomeRobot[whichRobot].position.Y);
 	tmp.Format(" || de: %lf | d_angle: %lf | theta_e: %lf\n",
 		 de, d_angle, theta_e);
@@ -253,6 +276,48 @@ void CGame::RobotStop(int whichRobot)
 void CGame::Dribble(int whichRobot)
 {
 	//TODO: cara untuk mendribble bola
+	double dx, dy, de, d_angle, theta_e;
+	double Kp = 3.2;
+	CString tmp, tmp2;
+
+	//dianggap id robot sudah tau
+	dx = Ball.position.X - HomeRobot[whichRobot].position.X;
+	dy = Ball.position.Y - HomeRobot[whichRobot].position.Y;
+
+	de = sqrt(dx * dx +  dy * dy );
+	
+	if(dx == 0 && dy ==0)
+	{
+		RobotStop(whichRobot);
+		return;
+	}
+	else
+	{
+		d_angle = (int)((180./M_PI)*atan2((double)(dy),(double)(dx)));
+	}
+	theta_e = d_angle - HomeRobot[whichRobot].Angle;
+
+	while(theta_e >180)  
+		theta_e -= 360;
+	while(theta_e <-180) 
+		theta_e += 360;
+	//nambah
+	if(abs(theta_e)<10) {
+		FollowBall(whichRobot);
+		return;
+	}
+	HomeRobot[whichRobot].lastVelocityLeft  = HomeRobot[whichRobot].VelocityLeft;
+	HomeRobot[whichRobot].lastVelocityRight = HomeRobot[whichRobot].VelocityRight;
+
+	HomeRobot[whichRobot].VelocityLeft	= (int)(Kp*(double)theta_e);
+	HomeRobot[whichRobot].VelocityRight	= (int)(-Kp*(double)theta_e);
+	//tmp2.Format("x,y: (%lf,%lf) x0,y0: (%li,%li)\n",x,y,HomeRobot[whichRobot].position.X, HomeRobot[whichRobot].position.Y);
+	tmp.Format(" || de: %lf | d_angle: %lf | theta_e: %lf\n",
+		 de, d_angle, theta_e);
+	//OutputDebugString(tmp2);
+	OutputDebugString(tmp);
+	Velocity(whichRobot);
+
 
 
 }
@@ -319,9 +384,12 @@ void CGame::Position(int whichRobot, int x, int y)
 
 	else
 	{
-		vr = (int)(+.17 * theta_e);
-		vl = (int)(-.17 * theta_e);
+		vr = (int)(+Ka * theta_e);
+		vl = (int)(-Ka * theta_e);
 	}
+	HomeRobot[whichRobot].lastVelocityLeft  = HomeRobot[whichRobot].VelocityLeft;
+	HomeRobot[whichRobot].lastVelocityRight = HomeRobot[whichRobot].VelocityRight;
+
 	HomeRobot[whichRobot].VelocityLeft = (vl);
 	HomeRobot[whichRobot].VelocityRight = (vr);
 	//kirim data kecepatan ke velocity
@@ -335,5 +403,6 @@ void CGame::FollowBall(int robot_id)
 	int bx, by;
 	bx = Ball.position.X;
 	by = Ball.position.Y;
-	Position(robot_id, bx, by);
+	//Position(robot_id, bx, by);
+	Position(robot_id, HomeRobot[robot_id].position.X+30, HomeRobot[robot_id].position.Y);
 }

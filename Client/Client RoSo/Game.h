@@ -27,6 +27,9 @@ typedef struct
 	int			Angle;			// angle
 	int			VelocityLeft;	// Left	 Wheel Velocity
 	int			VelocityRight;	// Right Wheel Velocity
+	//nambah (1809)
+	int			lastVelocityLeft;	//kecepatan kiri sebelumnya
+	int			lastVelocityRight;	//kecepatan kanan sebelumnya
 	BOOL		bFoundRobot;	// Found Robot Position flag
 } RobotDPosition;				// Robot 
 

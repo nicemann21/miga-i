@@ -408,7 +408,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 			//bisa koneksi
 			isKoneksi = TRUE;
 			//UpdateClientData();
-			m_cTimer = SetTimer(1,10,0);
+			m_cTimer = SetTimer(1,100,0);
 			pTombol = GetDlgItem(IDC_CONNECT);
 			pTombol->SetWindowText("Disconnect");
 		}

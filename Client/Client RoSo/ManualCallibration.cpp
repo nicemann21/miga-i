@@ -6,6 +6,8 @@
 #include "ManualCallibration.h"
 #include "Game.h"
 #include "serialclass.h"
+#include <ctime>
+
 
 
 // ManualCallibration dialog
@@ -29,15 +31,18 @@ void ManualCallibration::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_posx, m_posx);
 	DDX_Control(pDX, IDC_posy, m_posy);
 	DDX_Control(pDX, IDC_Kp, m_kp);
-	m_kp.SetWindowText("0.12");
+	m_kp.SetWindowText("2.0");
+	//m_id_robot.SetWindowText("2");
 	DDX_Control(pDX, IDC_VL, m_vl);
 	DDX_Control(pDX, IDC_VR, m_vr);
+	DDX_Control(pDX, IDC_ID_ROBOT, m_id_robot);
 }
 
 
 BEGIN_MESSAGE_MAP(ManualCallibration, CDialog)
 	ON_BN_CLICKED(ID_ROT, &ManualCallibration::OnBnClickedRot)
 	ON_BN_CLICKED(ID_GERAK, &ManualCallibration::OnBnClickedGerak)
+	ON_BN_CLICKED(IDC_STOP, &ManualCallibration::OnBnClickedStop)
 END_MESSAGE_MAP()
 
 
@@ -50,7 +55,28 @@ void ManualCallibration::OnBnClickedRot()
 	int sudut, posx, posy;
 	m_sudut.GetWindowText(cSudut);
 	sudut = atoi(cSudut);
-	gerakBelok(sudut);
+	//gerakBelok(sudut);
+	int t1, t2;
+	time_t currentTime, ct2;
+	
+
+
+	t1 = time(&currentTime);
+	t2 = t1+10;
+	CString ct, cx;
+	ct.Format("%s",ctime(&currentTime));
+	OutputDebugString(ct);
+	OutputDebugString("Mulai!\n");
+	while(t1!=t2)
+	{
+		//t1 = time(&currentTime);
+		
+		time(&ct2);
+		cx.Format("%s",ctime(&ct2));
+		OutputDebugString(cx);
+	}
+	OutputDebugString("Selesai!\n");
+	
 	
 	
 }
@@ -61,7 +87,9 @@ void ManualCallibration::gerakBelok(int sudut)
 	int theta_e =0;
 	int vl = 0, vr =0;
 	double Kp;
-	CString cKp, t;
+	CString cKp, t, sVl, sVr;
+	char arahL ='+', arahR = '-' ;
+	char data[17];
 	m_kp.GetWindowText(cKp);
 	Kp = atof(cKp);
 	
@@ -73,26 +101,119 @@ void ManualCallibration::gerakBelok(int sudut)
 		theta_e += 360;
 	vl = (int)(-Kp*(double)theta_e);
 	vr = (int)(Kp*(double)theta_e);
-	CGame g;
-	g.HomeRobot[1].VelocityLeft = vl;
-	g.HomeRobot[1].VelocityRight = vr;
-	g.Velocity(1);
+	//CGame g;
+	//g.HomeRobot[1].VelocityLeft = vl;
+	//g.HomeRobot[1].VelocityRight = vr;
+	
+	if ( vr > 255 ) vr = 255;	//Velocity Limte
+	if ( vl > 255 ) vl = 255;
+	if ( vr < -255) vr = -255;
+	if ( vl < -255) vl = -255;
+	//tentukan arahnya
+	arahL = (vl< 0)? '-':'+';
+	arahR = (vr< 0)? '-':'+';
+	vl = abs(vl);
+	vr = abs(vr);
+	//vl += 50;
+	//vr += 50;
+	//dibikin ke string?
+	if(vl < 100)
+	{
+		if(vl<10)
+			sVl.Format("00%d",vl);
+		else 
+			sVl.Format("0%d",vl);
+	}else
+	{
+		sVl.Format("%d",vl);
+	}
+	if(vr < 100)
+	{
+		if(vr<10)
+			sVr.Format("00%d",vr);
+		else 
+			sVr.Format("0%d",vr);
+	}else
+	{
+		sVr.Format("%d",vr);
+	}
+	for(int i=0;i<17;i++)
+	{
+		data[i]='C';
+	}
+	data[0] = '#';
+	data[1] = 'A';
+	data[2] = arahR;
+	data[4] = sVr[0];
+	data[6] = sVr[1];
+	data[8] = sVr[2];
+	data[10] = arahL;
+	data[12] = sVl[0];
+	data[14] = sVl[1];
+	data[16] = sVl[2];
+
+	Serial serial("\\\\.\\COM17");
+	if(serial.IsConnected())
+	{
+		serial.WriteData(data,80);
+	}else
+	{
+		OutputDebugString("Ga konek");
+	}
 	
 }
 
 void ManualCallibration::OnBnClickedGerak()
 {
 	// TODO: Add your control notification handler code here
-	CString cvl, cvr;
-	int vl, vr;
+	
+	CString cvl, cvr, c_idr;
+	int vl, vr, idr;
 	CGame g;
+	
 	m_vl.GetWindowText(cvl);
 	m_vr.GetWindowText(cvr);
+	m_id_robot.GetWindowText(c_idr);
 	
 	vl = atoi(cvl);
 	vr = atoi(cvr);
-	g.HomeRobot[1].VelocityLeft = vl;
-	g.HomeRobot[1].VelocityRight = vr;
-	g.Velocity(1);
+	idr = atoi(c_idr);
+	
+	
+	OutputDebugString("KUMAHAAAAAAAA IEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU!\n");
+	for(int i=0;i<600;i++){
+		g.HomeRobot[idr].VelocityLeft = vl;
+		g.HomeRobot[idr].VelocityRight = vr;
+		g.Velocity(idr);
+		//Sleep(20);
+	}
 
+	//OutputDebugString("Tunggu!\n");
+	//Sleep(2000);
+	//OutputDebugString("SELESAI!\n");
+	//g.HomeRobot[3].VelocityLeft = -vl;
+	//g.HomeRobot[3].VelocityRight = -vr;
+	//g.Velocity(3);
+
+	//g.HomeRobot[3].VelocityLeft = vl;
+	//g.HomeRobot[3].VelocityRight = vr;
+	//g.Velocity(3);
+	
+	//OutputDebugString("Tunggu!\n");
+	//Sleep(2000);
+	//OutputDebugString("SELESAI!\n");
+	//g.HomeRobot[idr].VelocityLeft = 0;
+	//g.HomeRobot[idr].VelocityRight = 0;
+	//g.Velocity(idr);
+
+
+}
+
+void ManualCallibration::OnBnClickedStop()
+{
+	CGame g;
+	g.HomeRobot[3].VelocityLeft = 0;//vl;
+	g.HomeRobot[3].VelocityRight = 0;//vr;
+	g.Velocity(3);
+	// TODO: Add your control notification handler code here
 }

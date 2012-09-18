@@ -33,4 +33,6 @@ public:
 	afx_msg void OnBnClickedGerak();
 	CEdit m_vl;
 	CEdit m_vr;
+	afx_msg void OnBnClickedStop();
+	CEdit m_id_robot;
 };

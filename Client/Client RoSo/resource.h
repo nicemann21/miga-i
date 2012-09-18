@@ -73,8 +73,9 @@
 #define IDC_SUDUT                       1053
 #define IDC_VR                          1054
 #define IDC_posy                        1055
-#define IDC_SUDUT2                      1056
 #define IDC_Kp                          1056
+#define IDC_STOP                        1057
+#define IDC_ID_ROBOT                    1058
 
 // Next default values for new objects
 // 
@@ -82,7 +83,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1055
+#define _APS_NEXT_CONTROL_VALUE         1059
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
