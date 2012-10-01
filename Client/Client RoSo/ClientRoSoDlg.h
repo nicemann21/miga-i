@@ -89,4 +89,10 @@ public:
 	// untuk koneksi ke server
 	CEdit m_IPServer;
 	afx_msg void OnBnClickedStopgame();
+	CStatic m_rb1;
+	CStatic m_rb2;
+	CStatic m_rb3;
+	CStatic m_rb4;
+	CStatic m_rb5;
+	CStatic m_ball;
 };

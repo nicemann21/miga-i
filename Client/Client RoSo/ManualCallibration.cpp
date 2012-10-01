@@ -56,27 +56,9 @@ void ManualCallibration::OnBnClickedRot()
 	m_sudut.GetWindowText(cSudut);
 	sudut = atoi(cSudut);
 	//gerakBelok(sudut);
-	int t1, t2;
-	time_t currentTime, ct2;
-	
+	CGame g;
+	g.Angle(2,sudut);
 
-
-	t1 = time(&currentTime);
-	t2 = t1+10;
-	CString ct, cx;
-	ct.Format("%s",ctime(&currentTime));
-	OutputDebugString(ct);
-	OutputDebugString("Mulai!\n");
-	while(t1!=t2)
-	{
-		//t1 = time(&currentTime);
-		
-		time(&ct2);
-		cx.Format("%s",ctime(&ct2));
-		OutputDebugString(cx);
-	}
-	OutputDebugString("Selesai!\n");
-	
 	
 	
 }
@@ -179,14 +161,20 @@ void ManualCallibration::OnBnClickedGerak()
 	vr = atoi(cvr);
 	idr = atoi(c_idr);
 	
+	g.HomeRobot[idr].lastVelocityLeft  = g.HomeRobot[idr].VelocityLeft;
+	g.HomeRobot[idr].lastVelocityRight = g.HomeRobot[idr].VelocityRight;
 	
 	OutputDebugString("KUMAHAAAAAAAA IEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU!\n");
-	for(int i=0;i<600;i++){
+	//for(int i=0;i<5;i++){
 		g.HomeRobot[idr].VelocityLeft = vl;
 		g.HomeRobot[idr].VelocityRight = vr;
 		g.Velocity(idr);
-		//Sleep(20);
-	}
+		/*g.HomeRobot[idr].VelocityLeft = vl;
+		g.HomeRobot[idr].VelocityRight = vr;
+		g.Velocity(idr);
+		*/
+
+	//}
 
 	//OutputDebugString("Tunggu!\n");
 	//Sleep(2000);
@@ -205,6 +193,9 @@ void ManualCallibration::OnBnClickedGerak()
 	//g.HomeRobot[idr].VelocityLeft = 0;
 	//g.HomeRobot[idr].VelocityRight = 0;
 	//g.Velocity(idr);
+	////g.HomeRobot[idr].VelocityLeft = 0;
+	////g.HomeRobot[idr].VelocityRight = 0;
+	//g.Velocity(idr);
 
 
 }
@@ -212,8 +203,13 @@ void ManualCallibration::OnBnClickedGerak()
 void ManualCallibration::OnBnClickedStop()
 {
 	CGame g;
-	g.HomeRobot[3].VelocityLeft = 0;//vl;
-	g.HomeRobot[3].VelocityRight = 0;//vr;
-	g.Velocity(3);
-	// TODO: Add your control notification handler code here
+	CString c_idr;
+	int idr;
+	m_id_robot.GetWindowText(c_idr);
+	idr = atoi(c_idr);
+	g.HomeRobot[idr].VelocityLeft = 0;//vl;
+	g.HomeRobot[idr].VelocityRight = 0;//vr;
+	g.Velocity(idr);
+	g.Velocity(idr);
+	
 }

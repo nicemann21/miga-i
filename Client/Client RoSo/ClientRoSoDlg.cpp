@@ -91,6 +91,13 @@ void CClientRoSoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON16, m_A4);
 	DDX_Control(pDX, IDC_BUTTON17, m_A5);
 	DDX_Control(pDX, IDC_eIPServer, m_IPServer);
+	m_IPServer.SetWindowText("167.205.66.75");
+	DDX_Control(pDX, IDC_RB1, m_rb1);
+	DDX_Control(pDX, IDC_RB2, m_rb2);
+	DDX_Control(pDX, IDC_RB3, m_rb3);
+	DDX_Control(pDX, IDC_RB4, m_rb4);
+	DDX_Control(pDX, IDC_RB5, m_rb5);
+	DDX_Control(pDX, IDC_BALL, m_ball);
 }
 
 BEGIN_MESSAGE_MAP(CClientRoSoDlg, CDialog)
@@ -246,65 +253,13 @@ void CClientRoSoDlg::OnBnClickedButton4()
 void CClientRoSoDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
-//ditutup dulu. coba yang server client (9/7)
-	/*
-	CDialog::OnTimer(nIDEvent);
-		UpdateData(true);
-		Timer1 = Timer1+1;
-		if(Timer1==10)
-		{
-			KillTimer(nIDEvent);
-			UpdateData(false);
-		}
-	UpdateData(false);
-	// Ambil data dari server
-	int x1 = 0;
-	int y1 = 170;
-	int x2 = 125;
-	int y2 = 90;
-	int x3 = 125;
-	int y3 = 250;
-	int x4 = 200;
-	int y4 = 170;
-	int x5 = 250;
-	int y5 = 170;
-	int x6 = 600;
-	int y6 = 170;
-	int x7 = 475;
-	int y7 = 80;
-	int x8 = 475;
-	int y8 = 260;
-	int x9 = 350;
-	int y9 = 110;
-	int x10 = 350;
-	int y10 = 230;
-
-	// Proses execute
-	m_R1.MoveWindow(x1+Timer1,y1,20,20,1);
-	m_R2.MoveWindow(x2+Timer1,y2,20,20,1);
-	m_R3.MoveWindow(x3+Timer1,y3,20,20,1);
-	m_R4.MoveWindow(x4+Timer1,y4,20,20,1);
-	m_R5.MoveWindow(x5+Timer1,y5,20,20,1);
-	m_A1.MoveWindow(x6+Timer1,y6,20,20,1);
-	m_A2.MoveWindow(x7+Timer1,y7,20,20,1);
-	m_A3.MoveWindow(x8+Timer1,y8,20,20,1);
-	m_A4.MoveWindow(x9+Timer1,y9,20,20,1);
-	m_A5.MoveWindow(x10+Timer1,y10,20,20,1);
-
-	*/
 	//ini yang server client(9/7/12)
 	UpdateData();
 	UpdateClientData();
-	
-
 
 	// AI
 	if(m_GameStart == true)
 		GameProccess();
-
-
-
-	// Send data to agent
 
 	UpdateData(FALSE);
 }
@@ -380,10 +335,7 @@ void CClientRoSoDlg::OnBnClickedStartgame()
 {
 	// TODO: menjalankan game
 	m_GameStart = true;
-	//OutputDebugString("start true\n");
 	
-	//GameProccess();
-	//m_CGame.AutoPosition();
 }
 
 void CClientRoSoDlg::OnBnClickedConnect()
@@ -427,7 +379,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 void CClientRoSoDlg::UpdateClientData()
 {
 	ClientContext* pContext=NULL;
-	//TODO: INI MSIH MANUAL. HARUSNYA BISA OTOMATIS DAPET ID
+	//TODO: INI MASIH MANUAL. HARUSNYA BISA OTOMATIS DAPET ID
 	int clID=0;
 	m_clientID = 348;
 	//IOCPS::getClientID(clID);
@@ -492,21 +444,6 @@ void CClientRoSoDlg::ekstrakData(CString data)
 	//m_CGame.setPos(Bx, By);
 	m_CGame.Ball.position.X = Bx;
 	m_CGame.Ball.position.Y = By;
-	//m_CGame.HomeRobot[0].position.X = ax;
-	//m_CGame.HomeRobot[0].position.Y = ay;
-	//m_CGame.HomeRobot[0].Angle		= at;
-	//m_CGame.HomeRobot[1].position.X = bx;
-	//m_CGame.HomeRobot[1].position.Y = by;
-	//m_CGame.HomeRobot[1].Angle		= bt;
-	//m_CGame.HomeRobot[2].position.X = cx;
-	//m_CGame.HomeRobot[2].position.Y = cy;
-	//m_CGame.HomeRobot[2].Angle		= ct;
-	//m_CGame.HomeRobot[3].position.X = dx;
-	//m_CGame.HomeRobot[3].position.Y = dy;
-	//m_CGame.HomeRobot[3].Angle		= dt;
-	//m_CGame.HomeRobot[4].position.X = ex;
-	//m_CGame.HomeRobot[4].position.Y = ey;
-	//m_CGame.HomeRobot[4].Angle		= et;
 	for(int i=0;i<5;i++)
 	{
 		m_CGame.HomeRobot[i].position.X = r[i].x;
@@ -521,19 +458,18 @@ void CClientRoSoDlg::ekstrakData(CString data)
 	//if(!hasil.IsEmpty())
 		//OutputDebugString(hasil);
 	//nambah bisa gerak ga itu si tombol
-	m_R1.MoveWindow(Bx,By,20,20,1);
-	//m_R2.MoveWindow(r[1].x,r[1].y,20,20,1);
-	//m_R3.MoveWindow(r[2].x,r[2].y,20,20,1);
-	//m_R4.MoveWindow(r[3].x,r[3].y,20,20,1);
-	//m_R5.MoveWindow(r[4].x,r[4].y,20,20,1);
-	//m_A1.MoveWindow(r[5].x,r[5].y,20,20,1);
-	//m_A2.MoveWindow(fx,fy,20,20,1);
-
-	m_R2.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
-	m_R3.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	//m_R1.MoveWindow(Bx,By,20,20,1);
+	m_ball.MoveWindow(Bx,By,20,20,1);
+	m_rb1.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	m_rb2.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	m_rb3.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
+	m_rb4.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
+	m_rb5.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
+	//m_R2.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	/*m_R3.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
 	m_R4.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
 	m_R5.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
-	m_A1.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
+	m_A1.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);*/
 	//m_A2.MoveWindow(fx,fy,20,20,1);
 
 
@@ -555,7 +491,7 @@ void CClientRoSoDlg::StartTheSystem()
  */
 void CClientRoSoDlg::GameProccess()
 {
-	//1. ambil data posisi objek (bola dan robot)
+	//jalankan fungsi strategi
 	m_CGame.Strategy();
 
 }

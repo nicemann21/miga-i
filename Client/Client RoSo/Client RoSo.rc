@@ -40,7 +40,7 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_CLIENTROSO_DIALOG DIALOGEX 0, 0, 524, 282
+IDD_CLIENTROSO_DIALOG DIALOGEX 0, 0, 549, 330
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "Client RoSo"
@@ -58,21 +58,33 @@ BEGIN
     CONTROL         "FreeBall",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,451,181,41,10
     CONTROL         "Strategi 1",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,451,194,47,10
     CONTROL         "Strategi 2",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON,451,208,47,10
-    GROUPBOX        "Select Team",IDC_STATIC,432,87,85,37,BS_CENTER
-    GROUPBOX        "Auto Position",IDC_STATIC,432,130,85,94,BS_CENTER
-    GROUPBOX        "Game Play",IDC_STATIC,0,0,418,220,BS_CENTER
-    EDITTEXT        IDC_EDIT1,198,225,22,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "B",IDC_BUTTON6,3,202,14,13
-    PUSHBUTTON      "H1",IDC_BUTTON7,20,202,14,13
-    PUSHBUTTON      "H2",IDC_BUTTON10,36,202,14,13
-    PUSHBUTTON      "H3",IDC_BUTTON11,52,202,14,13
-    PUSHBUTTON      "H4",IDC_BUTTON12,68,202,14,13
-    PUSHBUTTON      "H5",IDC_BUTTON13,333,201,14,13
-    PUSHBUTTON      "A2",IDC_BUTTON14,349,201,14,13
-    PUSHBUTTON      "A3",IDC_BUTTON15,365,201,14,13
-    PUSHBUTTON      "A4",IDC_BUTTON16,381,201,14,13
-    PUSHBUTTON      "A5",IDC_BUTTON17,398,201,14,13
+    GROUPBOX        "Select Team",IDC_STATIC,445,87,97,37,BS_CENTER
+    GROUPBOX        "Auto Position",IDC_STATIC,446,131,96,93,BS_CENTER
+    GROUPBOX        "Game Play",IDC_STATIC,0,0,429,300,BS_BITMAP | BS_CENTER
+    EDITTEXT        IDC_EDIT1,464,7,22,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "B",IDC_BUTTON6,3,285,14,13
+    PUSHBUTTON      "H1",IDC_BUTTON7,20,285,14,13
+    PUSHBUTTON      "H2",IDC_BUTTON10,36,285,14,13
+    PUSHBUTTON      "H3",IDC_BUTTON11,52,285,14,13
+    PUSHBUTTON      "H4",IDC_BUTTON12,68,285,14,13
+    PUSHBUTTON      "H5",IDC_BUTTON13,333,284,14,13
+    PUSHBUTTON      "A2",IDC_BUTTON14,349,284,14,13
+    PUSHBUTTON      "A3",IDC_BUTTON15,365,284,14,13
+    PUSHBUTTON      "A4",IDC_BUTTON16,381,284,14,13
+    PUSHBUTTON      "A5",IDC_BUTTON17,398,284,14,13
     EDITTEXT        IDC_eIPServer,443,26,63,14,ES_AUTOHSCROLL
+    CONTROL         130,IDC_PIC_CTRL,"Static",SS_BITMAP | SS_REALSIZEIMAGE,1,4,427,295,WS_EX_TRANSPARENT
+    CONTROL         138,IDC_RB1,"Static",SS_BITMAP,322,304,15,14
+    CONTROL         139,IDC_RB2,"Static",SS_BITMAP,302,304,15,14
+    CONTROL         140,IDC_RB3,"Static",SS_BITMAP,283,304,15,14
+    CONTROL         141,IDC_RB4,"Static",SS_BITMAP,265,304,15,14
+    CONTROL         142,IDC_RB5,"Static",SS_BITMAP,246,304,15,14
+    CONTROL         144,IDC_BALL,"Static",SS_BITMAP,209,302,10,9
+    CONTROL         145,IDC_RR1,"Static",SS_BITMAP,164,304,15,14
+    CONTROL         146,IDC_RR2,"Static",SS_BITMAP,144,304,15,14
+    CONTROL         147,IDC_RR3,"Static",SS_BITMAP,125,304,15,14
+    CONTROL         148,IDC_RR4,"Static",SS_BITMAP,107,304,15,14
+    CONTROL         149,IDC_RR5,"Static",SS_BITMAP,88,304,15,14
 END
 
 
@@ -133,8 +145,8 @@ BEGIN
 
     IDD_CLIENTROSO_DIALOG, DIALOG
     BEGIN
-        RIGHTMARGIN, 517
-        BOTTOMMARGIN, 275
+        RIGHTMARGIN, 542
+        BOTTOMMARGIN, 323
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -359,6 +371,28 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\Client RoSo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_Lapang              BITMAP                  "res\\lapang640-480.bmp"
+IDB_RBLUE               BITMAP                  "res\\rblue.bmp"
+IDB_RRED                BITMAP                  "res\\rred.bmp"
+IDB_RYELLOW             BITMAP                  "res\\ryellow.bmp"
+IDB_RB1                 BITMAP                  "res\\rb1.bmp"
+IDB_RB2                 BITMAP                  "res\\rb2.bmp"
+IDB_RB3                 BITMAP                  "res\\rb3.bmp"
+IDB_RB4                 BITMAP                  "res\\rb4.bmp"
+IDB_RB5                 BITMAP                  "res\\rb5.bmp"
+IDB_BALL                BITMAP                  "res\\ball.bmp"
+IDB_BALL2               BITMAP                  "res\\ball2.bmp"
+IDB_RR1                 BITMAP                  "res\\rr1.bmp"
+IDB_RR2                 BITMAP                  "res\\rr2.bmp"
+IDB_RR3                 BITMAP                  "res\\rr3.bmp"
+IDB_RR4                 BITMAP                  "res\\rr4.bmp"
+IDB_RR5                 BITMAP                  "res\\rr5.bmp"
 #endif    // Indonesian resources
 /////////////////////////////////////////////////////////////////////////////
 

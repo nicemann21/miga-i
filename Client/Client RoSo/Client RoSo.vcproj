@@ -315,6 +315,14 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath=".\res\ball.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\ball2.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\Client RoSo.ico"
 				>
 			</File>
@@ -324,6 +332,62 @@
 			</File>
 			<File
 				RelativePath=".\res\ClientRoSo.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\res\lapang640-480.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rb1.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rb2.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rb3.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rb4.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rb5.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rblue.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rr1.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rr2.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rr3.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rr4.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rr5.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\rred.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\ryellow.bmp"
 				>
 			</File>
 		</Filter>
