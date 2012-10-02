@@ -8,6 +8,24 @@
 #define IDD_CLIENTROSO_DIALOG           102
 #define IDD_CALLIBRATION                103
 #define IDR_MAINFRAME                   128
+#define IDD_MANUALCALLIBRATION          129
+#define IDB_Lapang                      130
+#define IDB_RBLUE                       134
+#define IDB_RRED                        135
+#define IDB_RYELLOW                     136
+#define IDB_RB1                         138
+#define IDB_RB2                         139
+#define IDB_RB3                         140
+#define IDB_RB4                         141
+#define IDB_RB5                         142
+#define IDB_BALL                        143
+#define IDB_BITMAP1                     144
+#define IDB_BALL2                       144
+#define IDB_RR1                         145
+#define IDB_RR2                         146
+#define IDB_RR3                         147
+#define IDB_RR4                         148
+#define IDB_RR5                         149
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
 #define IDC_BUTTON3                     1002
@@ -24,7 +42,9 @@
 #define IDC_EDIT1                       1013
 #define IDC_EDIT2                       1014
 #define IDC_BUTTON6                     1015
+#define IDC_VL                          1015
 #define IDC_BUTTON7                     1016
+#define IDC_posx                        1016
 #define IDC_EDIT3                       1017
 #define IDC_BUTTON10                    1017
 #define IDC_EDIT4                       1018
@@ -65,14 +85,35 @@
 #define IDC_CONNECT                     1048
 #define IDC_StopGame                    1049
 #define IDC_eIPServer                   1050
+#define ID_ROT                          1051
+#define ID_GERAK                        1052
+#define IDC_SUDUT                       1053
+#define IDC_VR                          1054
+#define IDC_posy                        1055
+#define IDC_Kp                          1056
+#define IDC_STOP                        1057
+#define IDC_ID_ROBOT                    1058
+#define IDC_PIC_CTRL                    1059
+#define IDC_RB1                         1060
+#define IDC_RB2                         1061
+#define IDC_RB3                         1062
+#define IDC_RB4                         1063
+#define IDC_RB5                         1064
+#define IDC_BALL                        1065
+#define IDC_RR1                         1066
+#define IDC_RR2                         1067
+#define IDC_RR3                         1068
+#define IDC_RR4                         1069
+#define IDC_RB10                        1070
+#define IDC_RR5                         1070
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        129
+#define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1051
+#define _APS_NEXT_CONTROL_VALUE         1066
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

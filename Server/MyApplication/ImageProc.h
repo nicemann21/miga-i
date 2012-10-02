@@ -13,6 +13,13 @@
 
 using namespace std;
 
+typedef struct {
+	int id;
+	int x;
+	int y;
+	int t;
+}RobotPosition;
+
 class CImageProc
 {
 public:
@@ -44,7 +51,7 @@ public:
 	void resetData(void);
 	void sendData(CString s);
 	CString getData();
-
+	RobotPosition HomeRobotPos[6], OppRobotPos;
 private:
 	bool isSecondary;
 	short numcolor;

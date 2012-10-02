@@ -5,6 +5,7 @@
 #include "ClientRoSo.h"
 #include "ClientRoSoDlg.h"
 #include "Callibration.h"
+#include "ManualCallibration.h"
 #include <iostream>
 //#include "tinythread.h"
 #include "stdafx.h"
@@ -90,6 +91,13 @@ void CClientRoSoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON16, m_A4);
 	DDX_Control(pDX, IDC_BUTTON17, m_A5);
 	DDX_Control(pDX, IDC_eIPServer, m_IPServer);
+	m_IPServer.SetWindowText("167.205.66.75");
+	DDX_Control(pDX, IDC_RB1, m_rb1);
+	DDX_Control(pDX, IDC_RB2, m_rb2);
+	DDX_Control(pDX, IDC_RB3, m_rb3);
+	DDX_Control(pDX, IDC_RB4, m_rb4);
+	DDX_Control(pDX, IDC_RB5, m_rb5);
+	DDX_Control(pDX, IDC_BALL, m_ball);
 }
 
 BEGIN_MESSAGE_MAP(CClientRoSoDlg, CDialog)
@@ -117,6 +125,7 @@ BEGIN_MESSAGE_MAP(CClientRoSoDlg, CDialog)
 	//ON_BN_CLICKED(IDC_BUTTON5, &CClientRoSoDlg::OnBnClickedButton5)
 	ON_BN_CLICKED(IDC_StartGame, &CClientRoSoDlg::OnBnClickedStartgame)
 	ON_BN_CLICKED(IDC_CONNECT, &CClientRoSoDlg::OnBnClickedConnect)
+	ON_BN_CLICKED(IDC_StopGame, &CClientRoSoDlg::OnBnClickedStopgame)
 END_MESSAGE_MAP()
 
 
@@ -130,6 +139,7 @@ BOOL CClientRoSoDlg::OnInitDialog()
 	//Start System server client
 	StartTheSystem();
 	isKoneksi = FALSE;
+	m_GameStart = false;
 	// Add "About..." menu item to system menu.
 
 	// IDM_ABOUTBOX must be in the system command range.
@@ -214,8 +224,11 @@ HCURSOR CClientRoSoDlg::OnQueryDragIcon()
 void CClientRoSoDlg::OnBnClickedButton2()
 {
 	// Callibration
-	CCallibration D1;
-	D1.DoModal();
+	//CCallibration D1;
+	//D1.DoModal();
+	ManualCallibration Mc;
+	Mc.DoModal();
+	
 	
 }
 
@@ -240,65 +253,15 @@ void CClientRoSoDlg::OnBnClickedButton4()
 void CClientRoSoDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
-//ditutup dulu. coba yang server client (9/7)
-	/*
-	CDialog::OnTimer(nIDEvent);
-		UpdateData(true);
-		Timer1 = Timer1+1;
-		if(Timer1==10)
-		{
-			KillTimer(nIDEvent);
-			UpdateData(false);
-		}
-	UpdateData(false);
-	// Ambil data dari server
-	int x1 = 0;
-	int y1 = 170;
-	int x2 = 125;
-	int y2 = 90;
-	int x3 = 125;
-	int y3 = 250;
-	int x4 = 200;
-	int y4 = 170;
-	int x5 = 250;
-	int y5 = 170;
-	int x6 = 600;
-	int y6 = 170;
-	int x7 = 475;
-	int y7 = 80;
-	int x8 = 475;
-	int y8 = 260;
-	int x9 = 350;
-	int y9 = 110;
-	int x10 = 350;
-	int y10 = 230;
-
-	// Proses execute
-	m_R1.MoveWindow(x1+Timer1,y1,20,20,1);
-	m_R2.MoveWindow(x2+Timer1,y2,20,20,1);
-	m_R3.MoveWindow(x3+Timer1,y3,20,20,1);
-	m_R4.MoveWindow(x4+Timer1,y4,20,20,1);
-	m_R5.MoveWindow(x5+Timer1,y5,20,20,1);
-	m_A1.MoveWindow(x6+Timer1,y6,20,20,1);
-	m_A2.MoveWindow(x7+Timer1,y7,20,20,1);
-	m_A3.MoveWindow(x8+Timer1,y8,20,20,1);
-	m_A4.MoveWindow(x9+Timer1,y9,20,20,1);
-	m_A5.MoveWindow(x10+Timer1,y10,20,20,1);
-
-	*/
 	//ini yang server client(9/7/12)
 	UpdateData();
 	UpdateClientData();
-	UpdateData(FALSE);
-
 
 	// AI
+	if(m_GameStart == true)
+		GameProccess();
 
-
-
-	// Send data to agent
-
-	
+	UpdateData(FALSE);
 }
 
 
@@ -371,7 +334,8 @@ void CClientRoSoDlg::OnBnClickedButton7()
 void CClientRoSoDlg::OnBnClickedStartgame()
 {
 	// TODO: menjalankan game
-	m_CGame.AutoPosition();
+	m_GameStart = true;
+	
 }
 
 void CClientRoSoDlg::OnBnClickedConnect()
@@ -382,6 +346,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 	//IP ditentukan langsung. harusnya bisa diisi sendiri
 	m_IPServer.GetWindowText(m_Alamat);
 	if(m_Alamat.IsEmpty())
+		//m_Alamat = "167.205.66.85";
 		m_Alamat = "127.0.0.1";
 	if(isKoneksi==FALSE)
 	{
@@ -395,7 +360,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 			//bisa koneksi
 			isKoneksi = TRUE;
 			//UpdateClientData();
-			m_cTimer = SetTimer(1,10,0);
+			m_cTimer = SetTimer(1,100,0);
 			pTombol = GetDlgItem(IDC_CONNECT);
 			pTombol->SetWindowText("Disconnect");
 		}
@@ -414,7 +379,7 @@ void CClientRoSoDlg::OnBnClickedConnect()
 void CClientRoSoDlg::UpdateClientData()
 {
 	ClientContext* pContext=NULL;
-	//TODO: INI MSIH MANUAL. HARUSNYA BISA OTOMATIS DAPET ID
+	//TODO: INI MASIH MANUAL. HARUSNYA BISA OTOMATIS DAPET ID
 	int clID=0;
 	m_clientID = 348;
 	//IOCPS::getClientID(clID);
@@ -427,7 +392,7 @@ void CClientRoSoDlg::UpdateClientData()
 	{
 		m_iocp.m_ContextMap.GetNextAssoc(pos,ikey,pContext);
 		m_clientID = pContext->m_Socket;
-		OutputDebugString(""+m_clientID);
+		//OutputDebugString(""+m_clientID);
 	}
 	//pContext = m_iocp.FindClient(m_clientID);
 	if(pContext!=NULL)
@@ -438,38 +403,75 @@ void CClientRoSoDlg::UpdateClientData()
 	}
 	m_iocp.m_ContextMapLock.Unlock();
 	//OutputDebugString(m_sReceivedTxt);
-	ekstrakData(m_teks);
+	if(!m_teks.IsEmpty())
+		ekstrakData(m_teks);
 	UpdateData(FALSE);
 }
 
 void CClientRoSoDlg::ekstrakData(CString data)
 {
-	//TODO: ini baru dummy. 
+	//TODO: ekstrak data. 
+	//diubah tgl 8/8/12
+	typedef struct{
+		int id;
+		int x;
+		int y;
+		int t;
+	} RPos;
+	RPos r[6];
 	int  Bx, By, count, idA, ax, ay, at, idB, bx, by, bt, idC, cx,cy,ct, idD, dx, dy, dt, idE, ex, ey, et, idF, fx, fy, ft;
 	CString hasil ="";
 	//sscanf(data,"[%d] ball %d %d | %d %d %d %d",&count, &bx, &by, &idA, &ax, &ay, &at);
 	sscanf(data,"[%d] ball %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d | %d %d %d %d",
 		&count, &Bx, &By, 
+		&r[0].id, &r[0].x, &r[0].y, &r[0].t,
+		&r[1].id, &r[1].x, &r[1].y, &r[1].t, 
+		&r[2].id, &r[2].x, &r[2].y, &r[2].t, 
+		&r[3].id, &r[3].x, &r[3].y, &r[3].t, 
+		&r[4].id, &r[4].x, &r[4].y, &r[4].t, 
+		&r[5].id, &r[5].x, &r[5].y, &r[5].t); 
+
+		/*&idD, &dx, &dy, &dt,
 		&idA, &ax, &ay, &at, 
+		&idE, &ex, &ey, &et,
 		&idB, &bx, &by, &bt,
 		&idC, &cx, &cy, &ct,
-		&idD, &dx, &dy, &dt,
-		&idE, &ex, &ey, &et,
-		&idF, &fx, &fy, &ft);
-	//OutputDebugString(data);
-	hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
-		count, bx, by, ax, ay, at);
-	if(!hasil.IsEmpty())
-		OutputDebugString(hasil);
-	//nambah bisa gerak ga itu si tombol
-	m_R1.MoveWindow(Bx,By,20,20,1);
-	m_R2.MoveWindow(ax,ay,20,20,1);
-	m_R3.MoveWindow(bx,by,20,20,1);
-	m_R4.MoveWindow(cx,cy,20,20,1);
-	m_R5.MoveWindow(dx,dy,20,20,1);
-	m_A1.MoveWindow(ex,ey,20,20,1);
-	m_A2.MoveWindow(fx,fy,20,20,1);
+		&idF, &fx, &fy, &ft);*/
 
+
+	//OutputDebugString(data);
+	//////////hahn (31/7)
+	//m_CGame.setPos(Bx, By);
+	m_CGame.Ball.position.X = Bx;
+	m_CGame.Ball.position.Y = By;
+	for(int i=0;i<5;i++)
+	{
+		m_CGame.HomeRobot[i].position.X = r[i].x;
+		m_CGame.HomeRobot[i].position.Y = r[i].y;
+		m_CGame.HomeRobot[i].Angle		= r[i].t;
+	}
+	//////////hahn (31/7)
+
+
+	//hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
+	//	count, bx, by, ax, ay, at);
+	//nambah bisa gerak ga itu si tombol
+	//m_R1.MoveWindow(Bx,By,20,20,1);
+	//m_R2.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	/*m_R3.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	m_R4.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
+	m_R5.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
+	m_A1.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);*/
+	//m_A2.MoveWindow(fx,fy,20,20,1);
+
+	//ganti pake gambar
+	m_ball.MoveWindow(Bx,By,20,20,1);
+	m_rb1.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	m_rb2.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	m_rb3.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
+	m_rb4.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
+	m_rb5.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
+	
 }
 
 void CClientRoSoDlg::StartTheSystem()
@@ -482,4 +484,18 @@ void CClientRoSoDlg::StartTheSystem()
 		MessageBox("StartSystem Ga bisa bro");
 		
 	}
+}
+/* proses game di sini(?)
+ * (31/7) H
+ */
+void CClientRoSoDlg::GameProccess()
+{
+	//jalankan fungsi strategi
+	m_CGame.Strategy();
+
+}
+void CClientRoSoDlg::OnBnClickedStopgame()
+{
+	// TODO: Add your control notification handler code here
+	m_GameStart = false;
 }

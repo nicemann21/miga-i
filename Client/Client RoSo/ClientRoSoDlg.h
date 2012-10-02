@@ -23,6 +23,7 @@ public:
 	CString m_teks;
 	int m_iPort;
 	BOOL isKoneksi;
+	BOOL m_GameStart;
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
@@ -44,8 +45,11 @@ private:
 	void UpdateList();
 	void StartTheSystem();
 	void ekstrakData(CString data);
+	//(31/7)
+	void GameProccess();
 	int m_cTimer;
 	int m_clientID;
+	RobotDPosition Robot[5], Opp[5];
 
 public:
 	afx_msg void OnBnClickedButton4();
@@ -84,4 +88,11 @@ public:
 	afx_msg void OnBnClickedConnect();
 	// untuk koneksi ke server
 	CEdit m_IPServer;
+	afx_msg void OnBnClickedStopgame();
+	CStatic m_rb1;
+	CStatic m_rb2;
+	CStatic m_rb3;
+	CStatic m_rb4;
+	CStatic m_rb5;
+	CStatic m_ball;
 };

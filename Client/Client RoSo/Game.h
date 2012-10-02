@@ -17,8 +17,8 @@
 //ini penting!
 typedef struct
 {
-	double		X;		// position
-	double		Y;		// position
+	int		X;		// position
+	int		Y;		// position
 } DPosition;				// Double point. untuk posisi
 
 typedef struct
@@ -27,6 +27,9 @@ typedef struct
 	int			Angle;			// angle
 	int			VelocityLeft;	// Left	 Wheel Velocity
 	int			VelocityRight;	// Right Wheel Velocity
+	//nambah (1809)
+	int			lastVelocityLeft;	//kecepatan kiri sebelumnya
+	int			lastVelocityRight;	//kecepatan kanan sebelumnya
 	BOOL		bFoundRobot;	// Found Robot Position flag
 } RobotDPosition;				// Robot 
 
@@ -44,19 +47,30 @@ public:
 	BallDPosition Ball;
 	void AutoPosition();
 	void SendCommand(BYTE *Data);	//ini untuk mengirimkan data ke robot
+	void SendCommand(char *data);
+	void Strategy();
+	void setPos(int x, int y);
+
+	void Velocity(int whichRobot);
+	void Angle(int whichRobot, int d_angle);//menentukan sudut berdasarkan sudut yang diminta
+	//tes:kejar bola
+	void FollowBall(int robot_id);
 
 	CGame();
 	virtual ~CGame();
 
 private:
-	void Velocity(int whichRobot);
-	void Angle(int whichRobot, int d_angle);//menentukan sudut berdasarkan sudut yang diminta
+	//void Velocity(int whichRobot);
+	void Position(int whichRobot, int x, int y);
+	//void Angle(int whichRobot, int d_angle);//menentukan sudut berdasarkan sudut yang diminta
 	void Angle2(int whichRobot, double x, double y); //menentukan berdasarkan posisi x,y
 	void Goalie(int whichRobot);
 	void Dribble(int whichRobot);
 	void RobotStop(int whichRobot);	//menghentikan robot[i]
+	//tes tendang ke gawang
+	void Tendang(int whichRobot);
 
 
-	CComm m_Comm;
+	CComm m_Comm; //ini kepake ga sih? lupa -__-
 
 };
