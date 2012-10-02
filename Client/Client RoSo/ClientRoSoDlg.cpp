@@ -455,16 +455,8 @@ void CClientRoSoDlg::ekstrakData(CString data)
 
 	//hasil.Format("count: %d| ball (%d, %d) | Home1(%d, %d, %d)\n",
 	//	count, bx, by, ax, ay, at);
-	//if(!hasil.IsEmpty())
-		//OutputDebugString(hasil);
 	//nambah bisa gerak ga itu si tombol
 	//m_R1.MoveWindow(Bx,By,20,20,1);
-	m_ball.MoveWindow(Bx,By,20,20,1);
-	m_rb1.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
-	m_rb2.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
-	m_rb3.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
-	m_rb4.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
-	m_rb5.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
 	//m_R2.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
 	/*m_R3.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
 	m_R4.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
@@ -472,7 +464,14 @@ void CClientRoSoDlg::ekstrakData(CString data)
 	m_A1.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);*/
 	//m_A2.MoveWindow(fx,fy,20,20,1);
 
-
+	//ganti pake gambar
+	m_ball.MoveWindow(Bx,By,20,20,1);
+	m_rb1.MoveWindow(m_CGame.HomeRobot[0].position.X,m_CGame.HomeRobot[0].position.Y,20,20,1);
+	m_rb2.MoveWindow(m_CGame.HomeRobot[1].position.X,m_CGame.HomeRobot[1].position.Y,20,20,1);
+	m_rb3.MoveWindow(m_CGame.HomeRobot[2].position.X,m_CGame.HomeRobot[2].position.Y,20,20,1);
+	m_rb4.MoveWindow(m_CGame.HomeRobot[3].position.X,m_CGame.HomeRobot[3].position.Y,20,20,1);
+	m_rb5.MoveWindow(m_CGame.HomeRobot[4].position.X,m_CGame.HomeRobot[4].position.Y,20,20,1);
+	
 }
 
 void CClientRoSoDlg::StartTheSystem()
